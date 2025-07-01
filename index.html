@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Control Reservas Hotel" />
+    <meta name="keywords" content="HTML, CSS, JavaScript, Tailwind" />
+    <meta name="author" content="Jorge Vargas y Oscar Vargas" />
+    <link rel="icon" type="image/svg+xml" href="./public/favicon.ico" />
+    <title>Control Reservas Hotel</title>
+  </head>
+  <body class="flex flex-row min-h-screen bg-gray-100">
+    <nav class="flex flex-col items-center bg-gray-700 text-white p-4 gap-1">
+      <button class="w-32 cursor-pointer hover:bg-gray-600" id="btnHome">Home</button>
+      <button class="w-32 cursor-pointer hover:bg-gray-600" id="btnRoom">Habitaciones</button>
+      <button class="w-32 cursor-pointer hover:bg-gray-600" id="btnReserve">Reservas</button>
+      <button class="w-32 cursor-pointer hover:bg-gray-600" id="btnCustomer">Clientes</button>
+    </nav>
+    <section class="flex-1 p-4  bg-gray-800">
+
+
+      <div id="content" class="w-auto"></div>
+      
+      <footer class="flex justify-center items-center text-white p-4 mt-4">
+        <p>&copy; 2025 Control Reservas Hotel</p>
+      </footer>
+    </section>
+
+    
+
+    <template id="card-template">
+      <div class="elements__card">
+        <div class="elements__card-info">
+          <p class="elements__card-title text-6xl flex-wrap">Hab: 203</p>
+          <p class="elements__card-description text-2xl">Habitación con vista al mar</p>
+          <p class="elements__card-price text-2xl">Precio: $100</p>
+          <p class="elements__card-availability text-2xl">Disponibilidad: Disponible</p> 
+        </div>
+      </div>
+    </template>
+
+     <template id="customer-template">
+      <div id="" class="customer__card flex flex-col items-center bg-gray-600 p-4 rounded shadow-lg gap-2.5 w-fit">
+        <div class="customer__card-info text-white">
+          <p class="customer__card-name text-2xl ">Nombre</p>
+          <p class="customer__card-cedula text-md">Cedula</p>
+        </div>
+        <button id="customer__edit-button" class="bg-green-600 hover:bg-amber-400 text-white font-bold py-2 px-4 rounded">
+          Editar
+        </button>
+         <button id="customer__delete-button" class="bg-red-600 hover:bg-amber-400 text-white font-bold py-2 px-4 rounded">
+          Eliminar
+        </button>
+      </div>
+    </template>
+
+    <script type="module" src="./src/main.js"></script>
+  </body>
+</html>
