@@ -26,7 +26,73 @@
       </footer>
     </section>
 
-    
+    <template id="clientesViewTemplate">
+      <div class="clientes__view flex flex-col p-4 bg-gray-800 rounded-lg gap-4 relative">
+        <h1 class="text-2xl font-bold text-white mb-4">Clientes</h1>
+        <button id="addClienteButton" class="bg-blue-700 text-white px-4 py-2 rounded hover:bg-blue-600 absolute top-6 right-4 z-10">
+          Agregar Cliente
+        </button>
+        <table class="w-full table-auto text-lg">
+          <thead class="bg-gray-700 text-white">
+              <tr class="grid grid-cols-5 text-center  align-middle">
+                  <th class="p-2 align-middle">Cédula</th>
+                  <th class="p-2 align-middle">Nombre</th>
+                  <th class="p-2 align-middle">Teléfono</th>
+                  <th class="p-2 align-middle">Email</th>
+                  <th class="p-2 align-middle">Acciones</th>
+                </tr>
+          </thead>
+          <tbody class=" text-white">
+             
+          </tbody>
+        </table>
+        <div id="clientesList" class="flex flex-row flex-wrap"></div>
+        
+      </div>
+    </template>
+
+    <template id="clienteItem-template">
+      <tr class="customer__item grid grid-cols-5 bg-gray-700 text-center align-middle text-white mb-1 w-full">
+            <td class="customer__card-cedula p-2  align-middle"></td>
+            <td class="customer__card-name p-2 align-middle"></td>
+            <td class="p-2 align-middle">No registrado</td>
+            <td class="p-2 align-middle">No registrado</td>
+            <td class="p-2 flex justify-center items-center gap-2">
+                <button id="customer__edit-button" class=" bg-green-700 hover:bg-green-600 h-8 w-fit text-white font-bold py-1 px-2 rounded cursor-pointer mr-2">
+                    <img src="./src/images/icons8-edit-64.png" alt="Editar" class="w-5 h-5 inline-block" />
+                </button>
+                <button id="customer__delete-button" class="bg-red-700 hover:bg-red-600 h-8 w-fit text-white font-bold py-1 px-2 rounded cursor-pointer">
+                    <img src="./src/images/icons8-delete-48.png" alt="Eliminar" class="w-5 h-5 inline-block" />
+
+                </button>
+            </td>
+        </tr>
+      
+      
+    </template>
+
+    <!-- <template id="clienteForm-template">
+      <div class="cliente__form flex flex-col p-4 bg-gray-800 rounded-lg gap-4">
+        <h2 class="text-xl font-bold text-white mb-4">Formulario de Cliente</h2>
+        <form id="clienteForm" class="flex flex-col gap-3">
+          <label for="cedula" class="text-white">Cédula:</label>
+          <input type="text" id="cedula" name="cedula" class="p-2 rounded bg-gray-700 text-white" required />
+          
+          <label for="nombre" class="text-white">Nombre:</label>
+          <input type="text" id="nombre" name="nombre" class="p-2 rounded bg-gray-700 text-white" required />
+          
+          <label for="telefono" class="text-white">Teléfono:</label>
+          <input type="tel" id="telefono" name="telefono" class="p-2 rounded bg-gray-700 text-white" required />
+          
+          <label for="email" class="text-white">Email:</label>
+          <input type="email" id="email" name="email" class="p-2 rounded bg-gray-700 text-white" required />
+          
+          <button type="submit" class="bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded mt-3">
+            Guardar Cliente
+          </button>
+        </form>
+      </div>
+    </template> -->
 
     <template id="card-template">
       <div class="elements__card">
@@ -36,21 +102,6 @@
           <p class="elements__card-price text-2xl">Precio: $100</p>
           <p class="elements__card-availability text-2xl">Disponibilidad: Disponible</p> 
         </div>
-      </div>
-    </template>
-
-     <template id="customer-template">
-      <div id="" class="customer__card flex flex-col items-center bg-gray-600 p-4 rounded shadow-lg gap-2.5 w-fit">
-        <div class="customer__card-info text-white">
-          <p class="customer__card-name text-2xl ">Nombre</p>
-          <p class="customer__card-cedula text-md">Cedula</p>
-        </div>
-        <button id="customer__edit-button" class="bg-green-600 hover:bg-amber-400 text-white font-bold py-2 px-4 rounded">
-          Editar
-        </button>
-         <button id="customer__delete-button" class="bg-red-600 hover:bg-amber-400 text-white font-bold py-2 px-4 rounded">
-          Eliminar
-        </button>
       </div>
     </template>
 

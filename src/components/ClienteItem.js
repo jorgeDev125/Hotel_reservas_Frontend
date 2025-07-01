@@ -1,6 +1,6 @@
 /* import { apiClienteInstance } from "../utils/clientes"; */
 
-export default class Cliente {
+export default class ClienteItem {
     constructor(data) {
         this._clienteId = data.id;
         this._cedula = data.cedula;
@@ -13,8 +13,8 @@ export default class Cliente {
     //función para clonar la plantilla
     _getTemplate() {
         const newCard = document
-        .querySelector("#customer-template")
-        .content.querySelector(".customer__card")
+        .querySelector("#clienteItem-template")
+        .content.querySelector(".customer__item")
         .cloneNode(true);
         return newCard;
     }
