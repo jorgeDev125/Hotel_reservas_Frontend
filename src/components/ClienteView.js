@@ -1,5 +1,7 @@
 /* import { apiClienteInstance } from "../utils/clientes"; */
 
+import PopupCliente from "./PopupCliente";
+
 export default class ClienteView {
     constructor() {      
     }
@@ -18,7 +20,10 @@ export default class ClienteView {
         this._element
         .querySelector("#addClienteButton")
         .addEventListener("click", () => {
-            console.log("Soy un boton de agregar usuario");
+            const popupCliente = new PopupCliente()
+            const popup = popupCliente.generatePopup();
+            popupCliente.open();
+            document.querySelector(".popupCliente").prepend(popup);
         });
        
     }

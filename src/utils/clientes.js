@@ -8,7 +8,7 @@ import { apiInstanceConfig } from "./constants";
 // Esta instancia se utilizará para realizar peticiones a la API de clientes
 export const apiClienteInstance = new ApiCliente(apiInstanceConfig);
 
-// Carga los usuarios de la base de datos
+// Carga inicial de usuarios desde la API
   let usuarios = [];
   try {
     usuarios = await apiClienteInstance.obtenerClientes();
@@ -17,7 +17,7 @@ export const apiClienteInstance = new ApiCliente(apiInstanceConfig);
   }
 
 export function renderClienteView() {
-
+  
   const clienteVista = new ClienteView().generateView();
   const clientesLista = clienteVista.querySelector("#clientesList")
 

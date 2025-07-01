@@ -6,101 +6,185 @@
     <meta name="description" content="Control Reservas Hotel" />
     <meta name="keywords" content="HTML, CSS, JavaScript, Tailwind" />
     <meta name="author" content="Jorge Vargas y Oscar Vargas" />
-    <link rel="icon" type="image/svg+xml" href="./public/favicon.ico" />
+    <link rel="icon" type="image/svg+xml" href="favicon.ico" />
     <title>Control Reservas Hotel</title>
   </head>
   <body class="flex flex-row min-h-screen bg-gray-100">
     <nav class="flex flex-col items-center bg-gray-700 text-white p-4 gap-1">
-      <button class="w-32 cursor-pointer hover:bg-gray-600" id="btnHome">Home</button>
-      <button class="w-32 cursor-pointer hover:bg-gray-600" id="btnRoom">Habitaciones</button>
-      <button class="w-32 cursor-pointer hover:bg-gray-600" id="btnReserve">Reservas</button>
-      <button class="w-32 cursor-pointer hover:bg-gray-600" id="btnCustomer">Clientes</button>
+      <button class="w-32 cursor-pointer hover:bg-gray-600" id="btnHome">
+        Home
+      </button>
+      <button class="w-32 cursor-pointer hover:bg-gray-600" id="btnRoom">
+        Habitaciones
+      </button>
+      <button class="w-32 cursor-pointer hover:bg-gray-600" id="btnReserve">
+        Reservas
+      </button>
+      <button class="w-32 cursor-pointer hover:bg-gray-600" id="btnCustomer">
+        Clientes
+      </button>
     </nav>
-    <section class="flex-1 p-4  bg-gray-800">
-
-
+    <section class="flex-1 p-4 bg-gray-800">
       <div id="content" class="w-auto"></div>
-      
+
+      <div
+        class="overlay hidden fixed top-0 left-0 w-screen h-screen bg-black opacity-80 z-9"
+      ></div>
+
+      <div class="popupCliente hidden"></div>
+
       <footer class="flex justify-center items-center text-white p-4 mt-4">
         <p>&copy; 2025 Control Reservas Hotel</p>
       </footer>
     </section>
 
     <template id="clientesViewTemplate">
-      <div class="clientes__view flex flex-col p-4 bg-gray-800 rounded-lg gap-4 relative">
+      <div
+        class="clientes__view flex flex-col p-4 bg-gray-800 rounded-lg gap-4 relative"
+      >
         <h1 class="text-2xl font-bold text-white mb-4">Clientes</h1>
-        <button id="addClienteButton" class="bg-blue-700 text-white px-4 py-2 rounded hover:bg-blue-600 absolute top-6 right-4 z-10">
+        <button
+          id="addClienteButton"
+          class="bg-blue-700 text-white px-4 py-2 rounded hover:bg-blue-600 absolute top-6 right-4 z-8"
+        >
           Agregar Cliente
         </button>
         <table class="w-full table-auto text-lg">
           <thead class="bg-gray-700 text-white">
-              <tr class="grid grid-cols-5 text-center  align-middle">
-                  <th class="p-2 align-middle">Cédula</th>
-                  <th class="p-2 align-middle">Nombre</th>
-                  <th class="p-2 align-middle">Teléfono</th>
-                  <th class="p-2 align-middle">Email</th>
-                  <th class="p-2 align-middle">Acciones</th>
-                </tr>
+            <tr class="grid grid-cols-5 text-center align-middle">
+              <th class="p-2 align-middle">Cédula</th>
+              <th class="p-2 align-middle">Nombre</th>
+              <th class="p-2 align-middle">Teléfono</th>
+              <th class="p-2 align-middle">Email</th>
+              <th class="p-2 align-middle">Acciones</th>
+            </tr>
           </thead>
-          <tbody class=" text-white">
-             
-          </tbody>
+          <tbody class="text-white"></tbody>
         </table>
         <div id="clientesList" class="flex flex-row flex-wrap"></div>
-        
       </div>
     </template>
 
     <template id="clienteItem-template">
-      <tr class="customer__item grid grid-cols-5 bg-gray-700 text-center align-middle text-white mb-1 w-full">
-            <td class="customer__card-cedula p-2  align-middle"></td>
-            <td class="customer__card-name p-2 align-middle"></td>
-            <td class="p-2 align-middle">No registrado</td>
-            <td class="p-2 align-middle">No registrado</td>
-            <td class="p-2 flex justify-center items-center gap-2">
-                <button id="customer__edit-button" class=" bg-green-700 hover:bg-green-600 h-8 w-fit text-white font-bold py-1 px-2 rounded cursor-pointer mr-2">
-                    <img src="./src/images/icons8-edit-64.png" alt="Editar" class="w-5 h-5 inline-block" />
-                </button>
-                <button id="customer__delete-button" class="bg-red-700 hover:bg-red-600 h-8 w-fit text-white font-bold py-1 px-2 rounded cursor-pointer">
-                    <img src="./src/images/icons8-delete-48.png" alt="Eliminar" class="w-5 h-5 inline-block" />
-
-                </button>
-            </td>
-        </tr>
-      
-      
+      <tr
+        class="customer__item grid grid-cols-5 bg-gray-700 text-center align-middle text-white mb-1 w-full"
+      >
+        <td class="customer__card-cedula p-2 align-middle"></td>
+        <td class="customer__card-name p-2 align-middle"></td>
+        <td class="p-2 align-middle">No registrado</td>
+        <td class="p-2 align-middle">No registrado</td>
+        <td class="p-2 flex justify-center items-center gap-2">
+          <button
+            id="customer__edit-button"
+            class="bg-blue-700 hover:bg-blue-600 h-8 w-fit text-white font-bold py-1 px-2 rounded cursor-pointer mr-2"
+          >
+            <img
+              src="./src/images/icons8-edit-64.png"
+              alt="Editar"
+              class="w-5 h-5 inline-block"
+            />
+          </button>
+          <button
+            id="customer__delete-button"
+            class="bg-red-700 hover:bg-red-600 h-8 w-fit text-white font-bold py-1 px-2 rounded cursor-pointer"
+          >
+            <img
+              src="./src/images/icons8-delete-48.png"
+              alt="Eliminar"
+              class="w-5 h-5 inline-block"
+            />
+          </button>
+        </td>
+      </tr>
     </template>
 
-    <!-- <template id="clienteForm-template">
-      <div class="cliente__form flex flex-col p-4 bg-gray-800 rounded-lg gap-4">
+    <template id="clienteForm-template">
+      <div
+        class="cliente__form absolute w-xs flex-col p-4 bg-gray-800 rounded-lg gap-4 shadow-lg  z-100"
+        style="
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          min-width: 320px;
+        "
+      >
+        <button
+          id="closeClienteFormButton"
+          class="absolute top-2 right-2 hover:bg-gray-700 text-white font-bold py-1 px-2 rounded"
+        >
+          <img
+            src="./src/images/icons8-close-50.png"
+            alt="Cerrar"
+            class="w-5 h-5 inline-block"
+          />
+        </button>
+
         <h2 class="text-xl font-bold text-white mb-4">Formulario de Cliente</h2>
         <form id="clienteForm" class="flex flex-col gap-3">
           <label for="cedula" class="text-white">Cédula:</label>
-          <input type="text" id="cedula" name="cedula" class="p-2 rounded bg-gray-700 text-white" required />
-          
+          <input
+            type="number"
+            id="cedula"
+            name="cedula"
+            class="p-2 rounded bg-gray-700 text-white"
+            required
+          />
+
           <label for="nombre" class="text-white">Nombre:</label>
-          <input type="text" id="nombre" name="nombre" class="p-2 rounded bg-gray-700 text-white" required />
-          
+          <input
+            type="text"
+            id="nombre"
+            name="nombre"
+            class="p-2 rounded bg-gray-700 text-white"
+            required
+          />
+
+          <label for="apellido" class="text-white">Apellido:</label>
+          <input
+            type="text"
+            id="apellido"
+            name="apellido"
+            class="p-2 rounded bg-gray-700 text-white"
+            required
+          />
+
           <label for="telefono" class="text-white">Teléfono:</label>
-          <input type="tel" id="telefono" name="telefono" class="p-2 rounded bg-gray-700 text-white" required />
-          
+          <input
+            type="tel"
+            id="telefono"
+            name="telefono"
+            class="p-2 rounded bg-gray-700 text-white"
+          />
+
           <label for="email" class="text-white">Email:</label>
-          <input type="email" id="email" name="email" class="p-2 rounded bg-gray-700 text-white" required />
-          
-          <button type="submit" class="bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded mt-3">
+          <input
+            type="email"
+            id="email"
+            name="email"
+            class="p-2 rounded bg-gray-700 text-white"
+          />
+
+          <button
+            type="submit"
+            class="bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded mt-3"
+          >
             Guardar Cliente
           </button>
         </form>
       </div>
-    </template> -->
+    </template>
 
     <template id="card-template">
       <div class="elements__card">
         <div class="elements__card-info">
           <p class="elements__card-title text-6xl flex-wrap">Hab: 203</p>
-          <p class="elements__card-description text-2xl">Habitación con vista al mar</p>
+          <p class="elements__card-description text-2xl">
+            Habitación con vista al mar
+          </p>
           <p class="elements__card-price text-2xl">Precio: $100</p>
-          <p class="elements__card-availability text-2xl">Disponibilidad: Disponible</p> 
+          <p class="elements__card-availability text-2xl">
+            Disponibilidad: Disponible
+          </p>
         </div>
       </div>
     </template>
