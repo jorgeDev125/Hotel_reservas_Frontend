@@ -3,12 +3,14 @@ import ClienteItem from "../components/ClienteItem";
 import ClienteView from "../components/ClienteView";
 import { apiInstanceConfig } from "./constants";
 
-
 //crea instancia de la clase ApiCliente
 // Esta instancia se utilizará para realizar peticiones a la API de clientes
 export const apiClienteInstance = new ApiCliente(apiInstanceConfig);
 
-// Carga inicial de usuarios desde la API
+export async function renderClienteView() {
+  const clienteVista = new ClienteView().generateView();
+  const clientesLista = clienteVista.querySelector("#clientesList");
+
   let usuarios = [];
   try {
     usuarios = await apiClienteInstance.obtenerClientes();
@@ -16,13 +18,8 @@ export const apiClienteInstance = new ApiCliente(apiInstanceConfig);
     console.error("Error al cargar usuarios:", error);
   }
 
-export function renderClienteView() {
-  
-  const clienteVista = new ClienteView().generateView();
-  const clientesLista = clienteVista.querySelector("#clientesList")
-
-    if (usuarios && usuarios.length > 0) {
-      usuarios.forEach((usuario) => {
+  if (usuarios && usuarios.length > 0) {
+    usuarios.forEach((usuario) => {
       clientesLista.appendChild(new ClienteItem(usuario).generateCustomer());
     });
   } else {
@@ -37,6 +34,6 @@ export function renderClienteView() {
     p.textContent = "No hay clientes disponibles.";
     clientesLista.appendChild(p);
   }
-  
+
   return clienteVista;
 }

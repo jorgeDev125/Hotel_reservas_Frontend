@@ -24,5 +24,5 @@ export async function inicializarRutas(ROUTER) {
     h1.classList.add("text-2xl", "font-bold", "text-white", "mb-4");
     return h1;
   });
-  ROUTER.add("clientes", renderClienteView);
+  ROUTER.add("clientes", async () => await renderClienteView());
 }

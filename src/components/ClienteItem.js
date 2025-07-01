@@ -89,6 +89,7 @@ export default class ClienteItem {
                   clientesLista.appendChild(p);
                 }
                 popupCliente.close(); // Cerrar el popup después de actualizar el cliente
+                alert("Cliente actualizado exitosamente");
               })
               .catch((error) => {
                 console.error("Error al actualizar cliente:", error);

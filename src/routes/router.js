@@ -32,7 +32,12 @@ export const ROUTER = {
     }
     const routeContent = this.routes[cleanPath];
     if (typeof routeContent === "function") {
-      content.appendChild(routeContent());
+      const result = routeContent();
+      if (result instanceof Promise) {
+        result.then((node) => node && content.appendChild(node));
+      } else if (result) {
+        content.appendChild(result);
+      }
     } else if (routeContent instanceof HTMLElement) {
       content.appendChild(routeContent);
     } else if (typeof routeContent === "string") {

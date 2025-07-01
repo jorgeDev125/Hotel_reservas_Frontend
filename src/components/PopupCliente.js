@@ -79,6 +79,7 @@ export default class PopupCliente {
               clientesLista.appendChild(p);
             }
             this.close(); // Cerrar el popup después de crear el cliente
+            alert("Cliente creado exitosamente");
           })
           .catch((error) => {
             console.error("Error al crear cliente:", error);
