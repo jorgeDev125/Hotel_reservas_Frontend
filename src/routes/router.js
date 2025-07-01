@@ -15,21 +15,28 @@ export const ROUTER = {
   render(path) {
     const content = document.getElementById("content");
     content.innerHTML = "";
-    // Si la ruta no existe, muestra 404
-    if (!(path in this.routes)) {
+    // Normaliza la ruta para ignorar barras, parámetros y queries
+    const cleanPath = (path || "").replace(/^\//, "").split(/[/?#]/)[0];
+    if (!(cleanPath in this.routes)) {
       const h1 = document.createElement("p");
-      h1.classList.add("text-white", "text-center", "w-full", "text-lg", "font-bold");
+      h1.classList.add(
+        "text-white",
+        "text-center",
+        "w-full",
+        "text-lg",
+        "font-bold"
+      );
       h1.textContent = "404 - La página no existe";
       content.appendChild(h1);
       return;
     }
-    const routeContent = this.routes[path];
+    const routeContent = this.routes[cleanPath];
     if (typeof routeContent === "function") {
-      routeContent();
+      content.appendChild(routeContent());
     } else if (routeContent instanceof HTMLElement) {
       content.appendChild(routeContent);
     } else if (typeof routeContent === "string") {
       content.insertAdjacentHTML("afterbegin", routeContent);
-    } 
+    }
   },
 };

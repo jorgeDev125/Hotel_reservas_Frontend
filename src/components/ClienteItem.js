@@ -1,94 +1,125 @@
 /* import { apiClienteInstance } from "../utils/clientes"; */
 
+import { apiClienteInstance } from "../utils/clientes";
+import PopupCliente from "./PopupCliente";
+
 export default class ClienteItem {
-    constructor(data) {
-        this._clienteId = data.id;
-        this._cedula = data.cedula;
-        this._nombre = data.nombre;
-        this._apellido = data.apellido;
-        this._telefono = data.telefono || "No registrado";
-        this._email = data.email || "No registrado";
-    }
+  constructor(data) {
+    this._clienteId = data.id;
+    this._cedula = data.cedula;
+    this._nombre = data.nombre;
+    this._apellido = data.apellido;
+    this._telefono = data.telefono || "";
+    this._email = data.email || "";
+  }
 
-    //función para clonar la plantilla
-    _getTemplate() {
-        const newCard = document
-        .querySelector("#clienteItem-template")
-        .content.querySelector(".customer__item")
-        .cloneNode(true);
-        return newCard;
-    }
+  //función para clonar la plantilla
+  _getTemplate() {
+    const newCard = document
+      .querySelector("#clienteItem-template")
+      .content.querySelector(".customer__item")
+      .cloneNode(true);
+    return newCard;
+  }
 
-    _setEventListeners() {
-        // Agregar el evento para el botón de editar
-        this._element
-        .querySelector("#customer__edit-button")
-        .addEventListener("click", () => {
-            console.log("Soy un boton de editar");
-            /* try {
-                apiClienteInstance.obtenerClientePorId(this._cedula)
-                .then((cliente) => {
-                    // Aquí puedes manejar la lógica para editar el cliente
-                    console.log("Cliente obtenido:", cliente);
-                    // Por ejemplo, podrías abrir un modal con los datos del cliente
-                    const modal = document.querySelector("#edit-customer-modal");
-                    modal.querySelector("#edit-customer-id").value = cliente.id;
-                    modal.querySelector("#edit-customer-cedula").value = cliente.cedula;
-                    modal.querySelector("#edit-customer-nombre").value = cliente.nombre;
-                    modal.querySelector("#edit-customer-apellido").value = cliente.apellido;
-                    modal.querySelector("#edit-customer-telefono").value = cliente.telefono || "";
-                    modal.querySelector("#edit-customer-email").value = cliente.email || "";
-                    modal.classList.add("is-active");
-                    // Aquí podrías agregar un evento para guardar los cambios
-                    modal.querySelector("#save-changes-button").addEventListener("click", () => {
-                        const updatedCliente = {
-                            id: modal.querySelector("#edit-customer-id").value,
-                            cedula: modal.querySelector("#edit-customer-cedula").value,
-                            nombre: modal.querySelector("#edit-customer-nombre").value,
-                            apellido: modal.querySelector("#edit-customer-apellido").value,
-                            telefono: modal.querySelector("#edit-customer-telefono").value || null,
-                            email: modal.querySelector("#edit-customer-email").value || null
-                        };
-                        // Aquí podrías llamar a un método para actualizar el cliente en la base de datos
-                        apiClienteInstance.actualizarCliente(updatedCliente.id, updatedCliente)
-                        .then(() => {
-                            console.log("Cliente actualizado:", updatedCliente);
-                            // Aquí podrías actualizar la vista del cliente
-                            this._element.querySelector(".customer__card-name").textContent = `${updatedCliente.nombre} ${updatedCliente.apellido}`;
-                            this._element.querySelector(".customer__card-cedula").textContent = updatedCliente.cedula;
-                            // Cerrar el modal
-                            modal.classList.remove("is-active");
-                        })
-                        .catch((error) => {
-                            console.error("Error al actualizar el cliente:", error);
-                        });
-                    });
-                })
-                
-            } catch (error) {
-                console.error("Error al obtener el cliente:", error);
-                
-            } */
-        });
-        // Agregar el evento para el botón de eliminar
-        this._element
-        .querySelector("#customer__delete-button")
-        .addEventListener("click", () => {
-            console.log("Soy un boton de elminar");
-        });
-    }
+  _setEventListeners() {
+    // Agregar el evento para el botón de editar
+    this._element
+      .querySelector("#customer__edit-button")
+      .addEventListener("click", () => {
+        try {
+          const popupCliente = new PopupCliente();
+          const popup = popupCliente.generatePopup();
+          //popup.querySelector("#clienteForm").id = "editClienteForm";
+          popup.querySelector("#cedula").value = this._cedula;
+          popup.querySelector("#nombre").value = this._nombre;
+          popup.querySelector("#apellido").value = this._apellido;
+          popup.querySelector("#telefono").value = this._telefono;
+          popup.querySelector("#email").value = this._email;
+          popup.querySelector(".save_button").textContent = "Guardar Cambios";
+          popup.querySelector(".form_title").textContent = "Actualizar Cliente";
+          popupCliente.open();
 
-    generateCustomer() {
-        this._element = this._getTemplate();
-        this._setEventListeners();
-        this._element.id = this._clienteId;
-        this._element.querySelector(".customer__card-name").textContent = `${this._nombre} ${this._apellido}`;
-        this._element.querySelector(".customer__card-cedula").textContent = this._cedula;
+          // Agrega el contenido del popup con los datos del cliente
+          document.querySelector(".popupCliente").prepend(popup);
 
-        return this._element;
-    }
-    /* get clienteId() {
-        return this._clienteId;
-    } */
+          // Elimina todos los event listeners previos de submit en el formulario
+          const oldForm = popup.querySelector("#clienteForm");
+          const newForm = oldForm.cloneNode(true);
+          oldForm.parentNode.replaceChild(newForm, oldForm);
 
+          newForm.addEventListener("submit", (evt) => {
+            evt.preventDefault();
+            const formData = new FormData(newForm);
+            const clienteData = {
+              cedula: formData.get("cedula"),
+              nombre: formData.get("nombre"),
+              apellido: formData.get("apellido"),
+              telefono: formData.get("telefono") || null,
+              email: formData.get("email") || null,
+            };
+
+            // reactualizar la lista de clientes
+            const clientesLista = document.querySelector("#clientesList");
+            apiClienteInstance
+              .actualizarCliente(this._cedula, clienteData)
+              .then(() => {
+                clientesLista.innerHTML = ""; // Limpiar la lista actual
+
+                // Volver a cargar los clientes
+                return apiClienteInstance.obtenerClientes();
+              })
+              .then((clientes) => {
+                if (clientes && clientes.length > 0) {
+                  clientes.forEach((cliente) => {
+                    clientesLista.appendChild(
+                      new ClienteItem(cliente).generateCustomer()
+                    );
+                  });
+                } else {
+                  const p = document.createElement("p");
+                  p.classList.add(
+                    "text-white",
+                    "text-center",
+                    "w-full",
+                    "text-lg",
+                    "font-bold"
+                  );
+                  p.textContent = "No hay clientes disponibles.";
+                  clientesLista.appendChild(p);
+                }
+                popupCliente.close(); // Cerrar el popup después de actualizar el cliente
+              })
+              .catch((error) => {
+                console.error("Error al actualizar cliente:", error);
+              });
+          });
+        } catch (error) {
+          console.error("Error al obtener el cliente:", error);
+        }
+      });
+    // Agregar el evento para el botón de eliminar
+    this._element
+      .querySelector("#customer__delete-button")
+      .addEventListener("click", () => {
+        console.log("Eliminar: " + this._clienteId);
+      });
+  }
+
+  generateCustomer() {
+    this._element = this._getTemplate();
+    this._setEventListeners();
+    this._element.id = this._clienteId;
+    this._element.querySelector(
+      ".customer__card-name"
+    ).textContent = `${this._nombre} ${this._apellido}`;
+    this._element.querySelector(".customer__card-cedula").textContent =
+      this._cedula;
+    this._element.querySelector(".customer__card-telefono").textContent =
+      this._telefono;
+    this._element.querySelector(".customer__card-email").textContent =
+      this._email;
+
+    return this._element;
+  }
 }

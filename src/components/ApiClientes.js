@@ -12,6 +12,7 @@ export class ApiCliente extends Api {
 
     // Método para obtener un cliente por ID
     obtenerClientePorId(clienteId) {
+        console.log(clienteId)
         return this._makeRequest(`/clientes/${clienteId}`);
     }
 
