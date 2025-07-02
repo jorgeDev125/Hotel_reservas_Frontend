@@ -1,4 +1,4 @@
-import { apiClienteInstance, renderClienteView } from "../utils/clientes";
+import { apiClienteInstance, renderClienteView } from "../../utils/clientes";
 import ClienteItem from "./ClienteItem";
 
 export default class PopupCliente {

@@ -1,6 +1,4 @@
-/* import { apiClienteInstance } from "../utils/clientes"; */
-
-import { apiClienteInstance } from "../utils/clientes";
+import { apiClienteInstance } from "../../utils/clientes";
 import PopupCliente from "./PopupCliente";
 
 export default class ClienteItem {

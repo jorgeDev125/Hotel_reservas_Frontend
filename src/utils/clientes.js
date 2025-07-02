@@ -1,6 +1,6 @@
-import { ApiCliente } from "../components/ApiClientes";
-import ClienteItem from "../components/ClienteItem";
-import ClienteView from "../components/ClienteView";
+import { ApiCliente } from "../components/cliente/ApiClientes";
+import ClienteItem from "../components/cliente/ClienteItem";
+import ClienteView from "../components/cliente/ClienteView";
 import { apiInstanceConfig } from "./constants";
 
 //crea instancia de la clase ApiCliente
