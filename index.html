@@ -11,16 +11,28 @@
   </head>
   <body class="flex flex-row min-h-screen bg-gray-100">
     <nav class="flex flex-col items-center bg-gray-700 text-white p-4 gap-1">
-      <button class="w-32 cursor-pointer hover:bg-gray-600 py-1 rounded-md"  id="btnHome">
+      <button
+        class="w-32 cursor-pointer hover:bg-gray-600 py-1 rounded-md"
+        id="btnHome"
+      >
         Home
       </button>
-      <button class="w-32 cursor-pointer hover:bg-gray-600 py-1 rounded-md" id="btnRoom">
+      <button
+        class="w-32 cursor-pointer hover:bg-gray-600 py-1 rounded-md"
+        id="btnRoom"
+      >
         Habitaciones
       </button>
-      <button class="w-32 cursor-pointer hover:bg-gray-600 py-1 rounded-md" id="btnReserve">
+      <button
+        class="w-32 cursor-pointer hover:bg-gray-600 py-1 rounded-md"
+        id="btnReserve"
+      >
         Reservas
       </button>
-      <button class="w-32 cursor-pointer hover:bg-gray-600 py-1 rounded-md" id="btnCustomer">
+      <button
+        class="w-32 cursor-pointer hover:bg-gray-600 py-1 rounded-md"
+        id="btnCustomer"
+      >
         Clientes
       </button>
     </nav>
@@ -39,9 +51,7 @@
     </section>
 
     <template id="clientesViewTemplate">
-      <div
-        class="clientes__view flex flex-col p-4 bg-gray-800 gap-4 relative"
-      >
+      <div class="clientes__view flex flex-col p-4 bg-gray-800 gap-4 relative">
         <h1 class="text-2xl font-bold text-white mb-4">Clientes</h1>
         <button
           id="addClienteButton"
@@ -78,7 +88,7 @@
             id="customer__edit-button"
             class="bg-blue-700 hover:bg-blue-600 h-8 w-fit text-white font-bold py-1 px-2 rounded cursor-pointer mr-2"
             title="Editar Cliente"
-            >
+          >
             <img
               src="./src/images/icons8-edit-64.png"
               alt="Editar"
@@ -89,7 +99,7 @@
             id="customer__delete-button"
             class="bg-red-700 hover:bg-red-600 h-8 w-fit text-white font-bold py-1 px-2 rounded cursor-pointer"
             title="Eliminar Cliente"
-            >
+          >
             <img
               src="./src/images/icons8-delete-48.png"
               alt="Eliminar"
@@ -102,7 +112,7 @@
 
     <template id="clienteForm-template">
       <div
-        class="cliente__form absolute w-xs flex-col p-4 bg-gray-800 rounded-lg gap-4 shadow-lg  z-100"
+        class="cliente__form absolute w-xs flex-col p-4 bg-gray-800 rounded-lg gap-4 shadow-lg z-100"
         style="
           top: 50%;
           left: 50%;
@@ -114,7 +124,7 @@
           id="closeClienteFormButton"
           class="absolute top-2 right-2 hover:bg-gray-700 text-white font-bold py-1 px-2 rounded"
           type="reset"
-          >
+        >
           <img
             src="./src/images/icons8-close-50.png"
             alt="Cerrar"
@@ -122,7 +132,9 @@
           />
         </button>
 
-        <h2 class="form_title text-xl font-bold text-white mb-4">Crear Cliente</h2>
+        <h2 class="form_title text-xl font-bold text-white mb-4">
+          Crear Cliente
+        </h2>
         <form id="clienteForm" class="flex flex-col gap-3">
           <label for="cedula" class="text-white">Cédula:</label>
           <input
@@ -187,18 +199,25 @@
       </div>
     </template>
 
-    <template id="card-template">
-      <div class="elements__card">
-        <div class="elements__card-info">
-          <p class="elements__card-title text-6xl flex-wrap">Hab: 203</p>
-          <p class="elements__card-description text-2xl">
-            Habitación con vista al mar
+    <template id="room-template">
+      <div
+        class="room__card flex flex-col gap-1 text-white border-2 border-lime-600 bg-gray-600 rounded-md shadow-lg w-fit"
+      >
+        <div class="room__card-info flex justify-between px-4 pt-2">
+          <p class="room__card-number text-4xl font-bold flex-wrap">
+            Hab: <span>203</span>
           </p>
-          <p class="elements__card-price text-2xl">Precio: $100</p>
-          <p class="elements__card-availability text-2xl">
-            Disponibilidad: Disponible
-          </p>
+          <img
+            src="./src/images/icons8-check-mark-64.png"
+            alt="Cerrar"
+            class="w-10 h-10 inline-block ml-14"
+          />
         </div>
+          <p class="room__card-category px-4 text-l">
+            Categoría: <span>Doble</span>
+          </p>
+          <p class="room__card-price px-4 text-l">Precio: $<span>80.000</span></p>
+          <p class="room__card-status bg-lime-600 py-2 px-4 text-l font-bold rounded-b-md">DISPONIBLE</p>
       </div>
     </template>
 
