@@ -92,7 +92,7 @@ export default class ClienteItem {
                 alert("Cliente actualizado exitosamente");
               })
               .catch((error) => {
-                console.error("Error al actualizar cliente:", error);
+                alert(error);
               });
           });
         } catch (error) {

@@ -8,20 +8,31 @@ export class Api {
     const options = {
       method,
       headers: { ...this.headers },
-    }
+    };
 
     if (body) {
       options.headers["Content-Type"] = "application/json";
       options.body = JSON.stringify(body);
     }
 
-    return fetch(`${this.baseUrl}${endpoint}`, options)    
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Error: ${res.status}`);
-      })
-      .catch((error) => console.error("Error:", error));
+    const res = await fetch(`${this.baseUrl}${endpoint}`, options);
+    let data;
+    try {
+      data = await res.json();
+    } catch {
+      data = null;
+    }
+
+    if (res.ok) {
+      return data;
+    } else {
+      // Muestra el mensaje de error del servidor si existe
+      const errorMsg =
+        data && data.message
+          ? data.message
+          : data.error || "Hubo un error al procesar la solicitud.";
+      //console.error("Error del servidor:", errorMsg);
+      throw new Error(errorMsg);
+    }
   }
 }
