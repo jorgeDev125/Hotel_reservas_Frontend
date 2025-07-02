@@ -22,6 +22,11 @@ export default class PopupCliente {
     document.querySelector(".popupCliente").classList.remove("hidden");
     document.querySelector(".popupCliente").classList.add("flex");
     document.querySelector(".overlay").classList.remove("hidden");
+    // Autoenfocar el input de cédula cuando se abre el modal
+    setTimeout(() => {
+      const cedulaInput = document.querySelector(".popupCliente #cedula");
+      if (cedulaInput) cedulaInput.focus();
+    }, 0);
   }
 
   close() {
@@ -82,7 +87,7 @@ export default class PopupCliente {
             alert("Cliente creado exitosamente");
           })
           .catch((error) => {
-            console.error("Error al crear cliente:", error);
+            alert(error);
           });
       });
 

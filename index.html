@@ -11,16 +11,16 @@
   </head>
   <body class="flex flex-row min-h-screen bg-gray-100">
     <nav class="flex flex-col items-center bg-gray-700 text-white p-4 gap-1">
-      <button class="w-32 cursor-pointer hover:bg-gray-600" id="btnHome">
+      <button class="w-32 cursor-pointer hover:bg-gray-600 py-1 rounded-md"  id="btnHome">
         Home
       </button>
-      <button class="w-32 cursor-pointer hover:bg-gray-600" id="btnRoom">
+      <button class="w-32 cursor-pointer hover:bg-gray-600 py-1 rounded-md" id="btnRoom">
         Habitaciones
       </button>
-      <button class="w-32 cursor-pointer hover:bg-gray-600" id="btnReserve">
+      <button class="w-32 cursor-pointer hover:bg-gray-600 py-1 rounded-md" id="btnReserve">
         Reservas
       </button>
-      <button class="w-32 cursor-pointer hover:bg-gray-600" id="btnCustomer">
+      <button class="w-32 cursor-pointer hover:bg-gray-600 py-1 rounded-md" id="btnCustomer">
         Clientes
       </button>
     </nav>
@@ -40,7 +40,7 @@
 
     <template id="clientesViewTemplate">
       <div
-        class="clientes__view flex flex-col p-4 bg-gray-800 rounded-lg gap-4 relative"
+        class="clientes__view flex flex-col p-4 bg-gray-800 gap-4 relative"
       >
         <h1 class="text-2xl font-bold text-white mb-4">Clientes</h1>
         <button
@@ -77,7 +77,8 @@
           <button
             id="customer__edit-button"
             class="bg-blue-700 hover:bg-blue-600 h-8 w-fit text-white font-bold py-1 px-2 rounded cursor-pointer mr-2"
-          >
+            title="Editar Cliente"
+            >
             <img
               src="./src/images/icons8-edit-64.png"
               alt="Editar"
@@ -87,7 +88,8 @@
           <button
             id="customer__delete-button"
             class="bg-red-700 hover:bg-red-600 h-8 w-fit text-white font-bold py-1 px-2 rounded cursor-pointer"
-          >
+            title="Eliminar Cliente"
+            >
             <img
               src="./src/images/icons8-delete-48.png"
               alt="Eliminar"
@@ -125,6 +127,7 @@
           <label for="cedula" class="text-white">Cédula:</label>
           <input
             type="number"
+            placeholder="Cédula del Cliente"
             id="cedula"
             name="cedula"
             class="p-2 rounded bg-gray-700 text-white"
@@ -134,8 +137,11 @@
           <label for="nombre" class="text-white">Nombre:</label>
           <input
             type="text"
+            placeholder="Nombre del Cliente"
             id="nombre"
             name="nombre"
+            min="2"
+            max="50"
             class="p-2 rounded bg-gray-700 text-white"
             required
           />
@@ -143,8 +149,11 @@
           <label for="apellido" class="text-white">Apellido:</label>
           <input
             type="text"
+            placeholder="Apellido del Cliente"
             id="apellido"
             name="apellido"
+            min="2"
+            max="50"
             class="p-2 rounded bg-gray-700 text-white"
             required
           />
@@ -152,14 +161,17 @@
           <label for="telefono" class="text-white">Teléfono:</label>
           <input
             type="tel"
+            placeholder="300 1234567"
             id="telefono"
             name="telefono"
+            max="20"
             class="p-2 rounded bg-gray-700 text-white"
           />
 
           <label for="email" class="text-white">Email:</label>
           <input
             type="email"
+            placeholder="email@correo.com"
             id="email"
             name="email"
             class="p-2 rounded bg-gray-700 text-white"
