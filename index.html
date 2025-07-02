@@ -199,36 +199,37 @@
       </div>
     </template>
 
-
-
     <template id="roomViewTemplate">
-      <div class="room__view flex flex-col p-4 bg-gray-800 gap-4 relative">
+      <div class="room__view flex flex-col p-4 bg-gray-800 gap-4">
         <h1 class="text-2xl font-bold text-white mb-4">Habitaciones</h1>
 
-        <div id="roomList" class="flex flex-row flex-wrap"></div>
+        <div id="roomList" class="flex flex-row flex-wrap gap-4 w-full"></div>
       </div>
     </template>
 
-
-    <template id="room-template">
+    <template id="roomItem-template">
       <div
-        class="room__card flex flex-col gap-1 text-white border-2 border-lime-600 bg-gray-600 rounded-md shadow-lg w-fit"
+        class="room__card flex flex-col gap-1 text-white border-2 border-lime-600 bg-gray-600 rounded-md shadow-lg min-w-fit"
       >
         <div class="room__card-info flex justify-between px-4 pt-2">
-          <p class="room__card-number text-4xl font-bold flex-wrap">
-            Hab: <span>203</span>
+          <p class=" text-4xl font-bold flex-wrap">
+            Hab: <span class="room__card-number">203</span>
           </p>
           <img
             src="./src/images/icons8-check-mark-64.png"
-            alt="Cerrar"
+            alt="Disponible"
             class="w-10 h-10 inline-block ml-14"
           />
         </div>
-          <p class="room__card-category px-4 text-l">
-            Categoría: <span>Doble</span>
-          </p>
-          <p class="room__card-price px-4 text-l">Precio: $<span>80.000</span></p>
-          <p class="room__card-status bg-lime-600 py-2 px-4 text-l font-bold rounded-b-md">DISPONIBLE</p>
+        <p class="px-4 text-md">
+          Categoría: <span class="room__card-category">Doble</span>
+        </p>
+        <p class="px-4 text-md">Precio: $<span class="room__card-price">80.000</span></p>
+        <p
+          class="room__card-status bg-lime-600 py-2 px-4 text-md font-bold rounded-b-md"
+        >
+          DISPONIBLE
+        </p>
       </div>
     </template>
 
