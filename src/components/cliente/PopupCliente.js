@@ -1,4 +1,4 @@
-import { apiClienteInstance, renderClienteView } from "../../utils/clientes";
+import { apiClienteInstance } from "../../utils/clientes";
 import ClienteItem from "./ClienteItem";
 
 export default class PopupCliente {
@@ -6,7 +6,7 @@ export default class PopupCliente {
 
   _getTemplate() {
     const newPopup = document
-      .querySelector("#clienteForm-template")
+      .querySelector("#clientePopup-template")
       .content.querySelector(".cliente__form")
       .cloneNode(true);
     return newPopup;
