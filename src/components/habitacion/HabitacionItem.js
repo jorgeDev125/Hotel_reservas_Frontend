@@ -1,3 +1,5 @@
+import { formatCurrency } from "../../utils/utils";
+
 export default class HabitacionItem {
   constructor(data) {
     this._habitacionId = data.habitacion_id;
@@ -33,7 +35,7 @@ export default class HabitacionItem {
     this._element.id = this._habitacionId;
     this._element.querySelector(".room__card-number").textContent = this._numero;
     this._element.querySelector(".room__card-category").textContent = this._categoria;
-    this._element.querySelector(".room__card-price").textContent = this._precio;
+    this._element.querySelector(".room__card-price").textContent = formatCurrency(this._precio);
     this._element.querySelector(".room__card-status").textContent = this._estado.toUpperCase();
 
 
