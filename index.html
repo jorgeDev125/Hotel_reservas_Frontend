@@ -9,34 +9,42 @@
     <link rel="icon" type="image/svg+xml" href="favicon.ico" />
     <title>Control Reservas Hotel</title>
   </head>
-  <body class="flex flex-row min-h-screen bg-gray-100">
-    <nav class="flex flex-col items-center bg-gray-700 text-white p-4 gap-1">
-      <button
-        class="w-32 cursor-pointer hover:bg-gray-600 py-1 rounded-md"
-        id="btnHome"
-      >
+  <body class="flex flex-row min-h-screen bg-gray-100 relative">
+    <div class="">
+
+      <nav class="flex flex-col items-center bg-gray-700 text-white h-screen sticky top-0 p-4 gap-1 ">
+        <img
+          src="./src/images/hotel-svgrepo-com.png"
+          alt="Mi Logo"
+          class="w-20 h-20 mb-5 inline-block"
+        />
+        <button
+          class="w-32 cursor-pointer hover:bg-gray-600 py-1 rounded-md"
+          id="btnHome"
+        >
         Home
-      </button>
-      <button
-        class="w-32 cursor-pointer hover:bg-gray-600 py-1 rounded-md"
-        id="btnRoom"
-      >
-        Habitaciones
-      </button>
-      <button
+        </button>
+        <button
+          class="w-32 cursor-pointer hover:bg-gray-600 py-1 rounded-md"
+          id="btnRoom"
+        >
+          Habitaciones
+        </button>
+        <button
         class="w-32 cursor-pointer hover:bg-gray-600 py-1 rounded-md"
         id="btnReserve"
-      >
+        >
         Reservas
-      </button>
-      <button
-        class="w-32 cursor-pointer hover:bg-gray-600 py-1 rounded-md"
-        id="btnCustomer"
-      >
-        Clientes
-      </button>
-    </nav>
-    <section class="flex-1 p-4 bg-gray-800">
+        </button>
+        <button
+          class="w-32 cursor-pointer hover:bg-gray-600 py-1 rounded-md"
+          id="btnCustomer"
+          >
+          Clientes
+        </button>
+      </nav>
+    </div>
+    <section class="flex-1 px-4 pb-4 bg-gray-800">
       <div id="content" class="w-auto"></div>
 
       <div
@@ -53,26 +61,30 @@
 
     <!-- Plantilla para clientesView -->
     <template id="clientesViewTemplate">
-      <div class="clientes__view flex flex-col p-4 bg-gray-800 gap-4 relative">
-        <h1 class="text-2xl font-bold text-white mb-4">Clientes</h1>
-        <button
-          id="addClienteButton"
-          class="bg-blue-700 text-white px-4 py-2 rounded hover:bg-blue-600 absolute top-6 right-4 z-8"
-        >
-          Agregar Cliente
-        </button>
-        <table class="w-full table-auto text-lg">
-          <thead class="bg-gray-700 text-white">
-            <tr class="grid grid-cols-5 text-center align-middle">
-              <th class="p-2 align-middle">Cédula</th>
-              <th class="p-2 align-middle">Nombre</th>
-              <th class="p-2 align-middle">Teléfono</th>
-              <th class="p-2 align-middle">Email</th>
-              <th class="p-2 align-middle">Acciones</th>
-            </tr>
-          </thead>
-          <tbody class="text-white"></tbody>
-        </table>
+      <div class="clientes__view flex flex-col px-4 pb-4 bg-gray-800 relative">
+        <div class="flex flex-col justify-between py-4 bg-gray-800 gap-4 sticky top-0">
+          <div class="flex flex-row justify-between">  
+            <h1 class="text-2xl font-bold text-white">Clientes</h1>
+            <button
+            id="addClienteButton"
+            class="bg-blue-700 text-white px-4 py-2 rounded  font-bold hover:bg-blue-600"
+            >
+            Agregar Cliente
+            </button>
+          </div>
+          <table class="w-full table-auto text-lg  ">
+            <thead class="bg-gray-600 text-white">
+              <tr class="grid grid-cols-5 text-center align-middle">
+                <th class="p-2 align-middle">Cédula</th>
+                <th class="p-2 align-middle">Nombre</th>
+                <th class="p-2 align-middle">Teléfono</th>
+                <th class="p-2 align-middle">Email</th>
+                <th class="p-2 align-middle">Acciones</th>
+              </tr>
+            </thead>
+            <tbody class="text-white"></tbody>
+          </table>
+        </div>
         <div id="clientesList" class="flex flex-row flex-wrap"></div>
       </div>
     </template>
@@ -89,7 +101,7 @@
         <td class="p-2 flex justify-center items-center gap-2">
           <button
             id="customer__edit-button"
-            class="bg-blue-700 hover:bg-blue-600 h-8 w-fit text-white font-bold py-1 px-2 rounded cursor-pointer mr-2"
+            class="bg-blue-700 hover:bg-blue-600 h-8 w-fit text-white font-bold py-1 px-2 rounded cursor-pointer"
             title="Editar Cliente"
           >
             <img
@@ -98,7 +110,8 @@
               class="w-5 h-5 inline-block"
             />
           </button>
-          <button
+          <!-- Boton de eliminar/ se quita ya que no se eliminan registros de usuarios -->
+          <!-- <button
             id="customer__delete-button"
             class="bg-red-700 hover:bg-red-600 h-8 w-fit text-white font-bold py-1 px-2 rounded cursor-pointer"
             title="Eliminar Cliente"
@@ -108,7 +121,7 @@
               alt="Eliminar"
               class="w-5 h-5 inline-block"
             />
-          </button>
+          </button> -->
         </td>
       </tr>
     </template>
@@ -205,8 +218,10 @@
 
     <!-- Plantilla para el roomView -->
     <template id="roomViewTemplate">
-      <div class="room__view flex flex-col p-4 bg-gray-800 gap-4">
-        <h1 class="text-2xl font-bold text-white mb-4">Habitaciones</h1>
+      <div class="room__view flex flex-col px-4 pb-4 bg-gray-800">
+        <div class="flex flex-row justify-between py-4 bg-gray-800 sticky top-0"> 
+          <h1 class="text-2xl font-bold text-white">Habitaciones</h1>
+        </div>
 
         <div id="roomList" class="flex flex-row flex-wrap gap-4 w-full"></div>
       </div>
@@ -215,16 +230,16 @@
     <!-- Plantill RoomItem -->
     <template id="roomItem-template">
       <div
-        class="room__card flex flex-col gap-1 text-white border-2 border-lime-600 bg-gray-600 rounded-md shadow-lg min-w-fit"
+        class="room__card flex flex-col gap-1 text-white border-2  bg-gray-600 rounded-md shadow-lg min-w-fit cursor-pointer"
       >
         <div class="room__card-info flex justify-between px-4 pt-2">
           <p class="text-4xl font-bold flex-wrap">
             Hab: <span class="room__card-number">203</span>
           </p>
           <img
-            src="./src/images/icons8-check-mark-64.png"
-            alt="Disponible"
-            class="w-10 h-10 inline-block ml-14"
+            src=""
+            alt=""
+            class="room-status__icon w-10 h-10 p-1.5 rounded-4xl inline-block ml-14"
           />
         </div>
         <p class="px-4 text-md">
@@ -234,7 +249,7 @@
           Precio: <span class="room__card-price">80.000</span>
         </p>
         <p
-          class="room__card-status bg-lime-600 py-2 px-4 text-md font-bold rounded-b-md"
+          class="room__card-status  py-2 px-4 text-md font-bold rounded-b-md"
         >
           DISPONIBLE
         </p>
@@ -243,14 +258,17 @@
 
     <!-- Plantilla para reservaView -->
     <template id="reservaViewTemplate">
-      <div class="reserva__view flex flex-col p-4 bg-gray-800 gap-4 relative">
-        <h1 class="text-2xl font-bold text-white mb-4">Reservaciones</h1>
-        <button
-          id="addReservaButton"
-          class="bg-blue-700 text-white px-4 py-2 rounded hover:bg-blue-600 absolute top-6 right-4 z-8"
-        >
-          Hacer Reservación
-        </button>
+      <div class="reserva__view flex flex-col px-4 pb-4 bg-gray-800">
+        <div class="flex flex-row justify-between py-4 bg-gray-800 sticky top-0">  
+            <h1 class="text-2xl font-bold text-white">Reservaciones</h1>
+            <button
+            id="addReservaButton"
+            class="bg-blue-700 text-white px-4 py-2 rounded font-bold hover:bg-blue-600"
+            >
+            Hacer Reservación
+            </button>
+        </div>
+       
         <div id="reservasList" class="flex flex-row flex-wrap gap-4 w-full"></div>
       </div>
     </template>
@@ -258,16 +276,16 @@
     <!-- Plnatilla ReservasItem -->
     <template id="reservationItem-template">
       <div
-        class="reservation__card flex flex-col gap-1 text-white border-2 border-gray-500 bg-gray-700 rounded-md shadow-lg min-w-fit"
+        class="reservation__card flex flex-col  text-white border-2  bg-gray-600 rounded-md shadow-lg min-w-fit"
       >
         <div class="reservation__card-info flex justify-between px-4 pt-2">
-          <p class="text-4xl font-bold flex-wrap">
+          <p class="text-3xl font-bold flex-wrap">
             Hab: <span class="reservation__room-number">203</span>
           </p>
           <img
-            src="./src/images/icons8-check-mark-64.png"
-            alt="Disponible"
-            class="w-10 h-10 inline-block ml-14"
+            src=""
+            alt=""
+            class="reservation__icon w-10 h-10 p-1 rounded-4xl inline-block ml-14"
           />
         </div>
         <p class="px-4 text-md">
@@ -276,11 +294,11 @@
         <p class="px-4 text-md">
           Cédula: <span class="reservation__client-cedula">55555555</span>
         </p>
-        <p class="px-4 text-md">
+        <p class="px-4 text-md mb-2">
           Cliente:
           <span class="reservation__client-name">Jorge Vargas</span>
         </p>
-        <p class="reservation__status bg-gray-500 py-2 px-4 text-md font-bold rounded-b-md">
+        <p class="reservation__status  py-2 px-4 text-md font-bold rounded-b-md">
           PENDIENTE
         </p>
       </div>
