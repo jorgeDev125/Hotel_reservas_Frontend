@@ -44,12 +44,14 @@
       ></div>
 
       <div class="popupCliente hidden"></div>
+      <div class="popupReserva hidden"></div>
 
       <footer class="flex justify-center items-center text-white p-4 mt-4">
         <p>&copy; 2025 Control Reservas Hotel</p>
       </footer>
     </section>
 
+    <!-- Plantilla para clientesView -->
     <template id="clientesViewTemplate">
       <div class="clientes__view flex flex-col p-4 bg-gray-800 gap-4 relative">
         <h1 class="text-2xl font-bold text-white mb-4">Clientes</h1>
@@ -75,6 +77,7 @@
       </div>
     </template>
 
+    <!-- Plantilla para clienteItem -->
     <template id="clienteItem-template">
       <tr
         class="customer__item grid grid-cols-5 bg-gray-700 text-center align-middle text-white mb-1 w-full"
@@ -110,7 +113,8 @@
       </tr>
     </template>
 
-    <template id="clienteForm-template">
+    <!-- Plantilla popupCliente -->
+    <template id="clientePopup-template">
       <div
         class="cliente__form absolute w-xs flex-col p-4 bg-gray-800 rounded-lg gap-4 shadow-lg z-100"
         style="
@@ -199,6 +203,7 @@
       </div>
     </template>
 
+    <!-- Plantilla para el roomView -->
     <template id="roomViewTemplate">
       <div class="room__view flex flex-col p-4 bg-gray-800 gap-4">
         <h1 class="text-2xl font-bold text-white mb-4">Habitaciones</h1>
@@ -207,12 +212,13 @@
       </div>
     </template>
 
+    <!-- Plantill RoomItem -->
     <template id="roomItem-template">
       <div
         class="room__card flex flex-col gap-1 text-white border-2 border-lime-600 bg-gray-600 rounded-md shadow-lg min-w-fit"
       >
         <div class="room__card-info flex justify-between px-4 pt-2">
-          <p class=" text-4xl font-bold flex-wrap">
+          <p class="text-4xl font-bold flex-wrap">
             Hab: <span class="room__card-number">203</span>
           </p>
           <img
@@ -224,12 +230,128 @@
         <p class="px-4 text-md">
           Categoría: <span class="room__card-category">Doble</span>
         </p>
-        <p class="px-4 text-md">Precio: $<span class="room__card-price">80.000</span></p>
+        <p class="px-4 text-md">
+          Precio: <span class="room__card-price">80.000</span>
+        </p>
         <p
           class="room__card-status bg-lime-600 py-2 px-4 text-md font-bold rounded-b-md"
         >
           DISPONIBLE
         </p>
+      </div>
+    </template>
+
+    <!-- Plantilla para reservaView -->
+    <template id="reservaViewTemplate">
+      <div class="reserva__view flex flex-col p-4 bg-gray-800 gap-4 relative">
+        <h1 class="text-2xl font-bold text-white mb-4">Reservaciones</h1>
+        <button
+          id="addReservaButton"
+          class="bg-blue-700 text-white px-4 py-2 rounded hover:bg-blue-600 absolute top-6 right-4 z-8"
+        >
+          Hacer Reservación
+        </button>
+        <div id="reservasList" class="flex flex-row flex-wrap gap-4 w-full"></div>
+      </div>
+    </template>
+
+    <!-- Plnatilla ReservasItem -->
+    <template id="reservationItem-template">
+      <div
+        class="reservation__card flex flex-col gap-1 text-white border-2 border-gray-500 bg-gray-700 rounded-md shadow-lg min-w-fit"
+      >
+        <div class="reservation__card-info flex justify-between px-4 pt-2">
+          <p class="text-4xl font-bold flex-wrap">
+            Hab: <span class="reservation__room-number">203</span>
+          </p>
+          <img
+            src="./src/images/icons8-check-mark-64.png"
+            alt="Disponible"
+            class="w-10 h-10 inline-block ml-14"
+          />
+        </div>
+        <p class="px-4 text-md">
+          Fecha: <span class="reservation__date">2025-07-02</span>
+        </p>
+        <p class="px-4 text-md">
+          Cédula: <span class="reservation__client-cedula">55555555</span>
+        </p>
+        <p class="px-4 text-md">
+          Cliente:
+          <span class="reservation__client-name">Jorge Vargas</span>
+        </p>
+        <p class="reservation__status bg-gray-500 py-2 px-4 text-md font-bold rounded-b-md">
+          PENDIENTE
+        </p>
+      </div>
+    </template>
+
+    <!-- Plantilla PopupReserva -->
+     <template id="reservaForm-template">
+      <div
+        class="reserva__form absolute w-xs flex-col p-4 bg-gray-800 rounded-lg gap-4 shadow-lg z-100"
+        style="
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          min-width: 320px;
+        "
+      >
+        <button
+          id="closeReservaFormButton"
+          class="absolute top-2 right-2 hover:bg-gray-700 text-white font-bold py-1 px-2 rounded"
+          type="reset"
+        >
+          <img
+            src="./src/images/icons8-close-50.png"
+            alt="Cerrar"
+            class="w-5 h-5 inline-block"
+          />
+        </button>
+
+        <h2 class="form_title text-xl font-bold text-white mb-4">
+          Crear Reservación
+        </h2>
+        <form id="reservaForm" class="flex flex-col gap-3">
+          <label for="cedula" class="text-white">Cédula:</label>
+          <input
+            type="number"
+            placeholder="Cédula del Cliente"
+            id="cedula"
+            name="cedula"
+            class="p-2 rounded bg-gray-700 text-white"
+            required
+          />
+
+          <label for="noches" class="text-white">Número de noches:</label>
+          <input
+            type="number"
+            placeholder="Número de noches"
+            id="noches"
+            name="noches"
+            class="p-2 rounded bg-gray-700 text-white"
+            required
+          />
+
+          <label for="habitacion" class="text-white">Habitación:</label>
+          <input
+            type="number"
+            placeholder="Habitación"
+            id="habitacion"
+            name="habitacion"
+            min="2"
+            max="50"
+            class="p-2 rounded bg-gray-700 text-white"
+            required
+          />
+
+          <button
+            type="submit"
+            class="save_button bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded mt-3"
+          >
+            Crear Reservación
+          </button>
+        </form>
       </div>
     </template>
 
