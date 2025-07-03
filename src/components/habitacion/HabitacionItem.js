@@ -52,6 +52,12 @@ export default class HabitacionItem {
           this._element.querySelector(".room-status__icon").classList.add("bg-lime-600");
           this._element.querySelector(".room-status__icon").src = "./src/images/disponible.png";
           break;
+        case "Reservada":
+          this._element.classList.add("border-gray-500");
+          this._element.querySelector(".room__card-status").classList.add("bg-gray-500");
+          this._element.querySelector(".room-status__icon").classList.add("bg-gray-500");
+          this._element.querySelector(".room-status__icon").src = "./src/images/disponible.png";
+          break;
         case "Ocupada":
           this._element.classList.add("border-amber-600");
           this._element.querySelector(".room__card-status").classList.add("bg-amber-600");
@@ -61,7 +67,7 @@ export default class HabitacionItem {
         case "En Limpieza":
           this._element.classList.add("border-blue-700");
           this._element.querySelector(".room__card-status").classList.add("bg-blue-700");
-          this._element.querySelector(".room-status__icon").classList.add("bg-blue-600");
+          this._element.querySelector(".room-status__icon").classList.add("bg-blue-700");
           this._element.querySelector(".room-status__icon").src = "./src/images/limpieza.png";
           break;
         case "No Disponible":
