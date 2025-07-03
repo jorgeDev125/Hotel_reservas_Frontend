@@ -6,7 +6,7 @@ export default class PopupReserva {
 
   _getTemplate() {
     const newPopup = document
-      .querySelector("#reservaForm-template")
+      .querySelector("#reservaPopup-template")
       .content.querySelector(".reserva__form")
       .cloneNode(true);
     return newPopup;
@@ -49,9 +49,8 @@ export default class PopupReserva {
         const reservaData = {
           clienteId: formData.get("cedula"),
           numeroNoches: formData.get("noches"),
-          habitacionId: formData.get("habitacion")
+          habitacionId: formData.get("habitacion"),
         };
-        
 
         // reactualizar la lista de reservas
         const reservasLista = document.querySelector("#reservasList");

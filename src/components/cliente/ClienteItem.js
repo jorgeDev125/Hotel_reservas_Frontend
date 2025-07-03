@@ -98,11 +98,11 @@ export default class ClienteItem {
         }
       });
     // Agregar el evento para el botón de eliminar
-    this._element
+    /* this._element
       .querySelector("#customer__delete-button")
       .addEventListener("click", () => {
         console.log("Eliminar: " + this._clienteId);
-      });
+      }); */
   }
 
   generateCustomer() {

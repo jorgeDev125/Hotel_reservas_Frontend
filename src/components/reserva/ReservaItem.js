@@ -15,9 +15,6 @@ export default class ReservaItem {
     this._estado_reserva = data.estado_reserva;
   }
 
-
-      
-
   //función para clonar la plantilla
   _getTemplate() {
     const newCard = document
@@ -27,55 +24,78 @@ export default class ReservaItem {
     return newCard;
   }
 
-
   _setEventListeners() {
     // Agregar el evento para el botón de editar
-    this._element
-      .addEventListener("click", () => {
-        console.log(this._reserva_id)
-      });
+    this._element.addEventListener("click", () => {
+      console.log(this._reserva_id);
+    });
     // Agregar el evento para el botón de eliminar
-   
   }
 
   generateReserva() {
     this._element = this._getTemplate();
     this._setEventListeners();
     this._element.id = this._reserva_id;
-    this._element.querySelector(".reservation__room-number").textContent = this._numero_habitacion;
-    this._element.querySelector(".reservation__date").textContent = formatDateTime(this._fecha_registro);
-    this._element.querySelector(".reservation__client-cedula").textContent = this._cedula;
-    this._element.querySelector(".reservation__client-name").textContent = `${this._nombre_cliente} ${this._apellido_cliente}`;
-    this._element.querySelector(".reservation__status").textContent = this._estado_reserva.toUpperCase();
-    this._element.querySelector(".reservation__icon").alt = this._estado_reserva;
-
+    this._element.querySelector(".reservation__number").textContent =
+      this._reserva_id;
+    this._element.querySelector(".reservation__date").textContent =
+      formatDateTime(this._fecha_registro);
+    this._element.querySelector(".reservation__room_number").textContent =
+      this._numero_habitacion;
+    this._element.querySelector(
+      ".reservation__client-name"
+    ).textContent = `${this._nombre_cliente} ${this._apellido_cliente}`;
+    this._element.querySelector(".reservation__status").textContent =
+      this._estado_reserva.toUpperCase();
+    this._element.querySelector(".reservation__icon").alt =
+      this._estado_reserva;
 
     switch (this._estado_reserva) {
-        case "Pendiente":
-          this._element.classList.add("border-gray-500");
-          this._element.querySelector(".reservation__status").classList.add("bg-gray-500");
-          this._element.querySelector(".reservation__icon").classList.add("bg-gray-500");
-          this._element.querySelector(".reservation__icon").src = "./src/images/pendiente.png";
-          break;
-        case "Activa":
-          this._element.classList.add("border-blue-700");
-          this._element.querySelector(".reservation__status").classList.add("bg-blue-700");
-          this._element.querySelector(".reservation__icon").classList.add("bg-blue-700");
-          this._element.querySelector(".reservation__icon").src = "./src/images/activa.png";
-            break;
-        case "Completada":
-          this._element.classList.add("border-lime-600");
-          this._element.querySelector(".reservation__status").classList.add("bg-lime-600");
-          this._element.querySelector(".reservation__icon").classList.add("bg-lime-600");
-          this._element.querySelector(".reservation__icon").src = "./src/images/completada.png";
-          break;
-        case "Cancelada":
-          this._element.classList.add("border-red-700");
-          this._element.querySelector(".reservation__status").classList.add("bg-red-700");
-          this._element.querySelector(".reservation__icon").classList.add("bg-red-700");
-          this._element.querySelector(".reservation__icon").src = "./src/images/no-disponible.png";
-          break;
-      }
+      case "Pendiente":
+        this._element.classList.add("border-gray-500");
+        this._element
+          .querySelector(".reservation__status")
+          .classList.add("bg-gray-500");
+        this._element
+          .querySelector(".reservation__icon")
+          .classList.add("bg-gray-500");
+        this._element.querySelector(".reservation__icon").src =
+          "./src/images/pendiente.png";
+        break;
+      case "Activa":
+        this._element.classList.add("border-amber-600");
+        this._element
+          .querySelector(".reservation__status")
+          .classList.add("bg-amber-600");
+        this._element
+          .querySelector(".reservation__icon")
+          .classList.add("bg-amber-600");
+        this._element.querySelector(".reservation__icon").src =
+          "./src/images/activa.png";
+        break;
+      case "Completada":
+        this._element.classList.add("border-lime-600");
+        this._element
+          .querySelector(".reservation__status")
+          .classList.add("bg-lime-600");
+        this._element
+          .querySelector(".reservation__icon")
+          .classList.add("bg-lime-600");
+        this._element.querySelector(".reservation__icon").src =
+          "./src/images/completada.png";
+        break;
+      case "Cancelada":
+        this._element.classList.add("border-red-700");
+        this._element
+          .querySelector(".reservation__status")
+          .classList.add("bg-red-700");
+        this._element
+          .querySelector(".reservation__icon")
+          .classList.add("bg-red-700");
+        this._element.querySelector(".reservation__icon").src =
+          "./src/images/no-disponible.png";
+        break;
+    }
 
     return this._element;
   }
