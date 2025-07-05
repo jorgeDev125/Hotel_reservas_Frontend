@@ -22,9 +22,19 @@ export default class HabitacionItem {
   _setEventListeners() {
     // Agregar el evento para el botón de editar
     this._element.addEventListener("click", () => {
+
+        localStorage.setItem("habitacion_para_popup", JSON.stringify({numero : this._numero, categroia: this._categoria, precio: this._precio}));
+        // Redirige a /clientes
+        window.location.href = "/reservas";
+
+
+
       const popupReserva = new PopupReserva();
       const popup = popupReserva.generatePopup();
-      popup.querySelector("#habitacion").value = this._numero;
+      popup.querySelector("#habitacion_numero").textContent = this._numero;
+      popup.querySelector("#habitacion_categoria").textContent = this._categoria;
+      popup.querySelector("#habitacion_precio").textContent =formatCurrency( this._precio );
+      popup.querySelector("#habitacion_id").value =this._habitacionId;
       popupReserva.open();
       document.querySelector(".popupReserva").prepend(popup);
     });

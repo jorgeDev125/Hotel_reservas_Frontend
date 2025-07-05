@@ -32,12 +32,12 @@ export class ApiHabitacion extends Api {
     // }   
 
     //cambiar estado de una habitación
-    async cambiarEstadoHabitacion(id, estado) {
-        return await this._makeRequest(`/habitaciones/${id}/estado`, "PUT", { estado });
+    async cambiarEstadoHabitacion(habitacionId, estadoId) {
+        return await this._makeRequest(`/habitaciones/${habitacionId}/estado`, "PUT", { estadoId });
     }
     //buscar habitaciones por estado
-    async buscarHabitacionesPorEstado(estado) {
-        return await this._makeRequest(`/habitaciones/estado/${estado}`);
+    async buscarHabitacionesPorEstado(estadoId) {
+        return await this._makeRequest(`/habitaciones/estado/${estadoId}`);
     }
 
 }
