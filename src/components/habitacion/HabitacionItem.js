@@ -1,5 +1,5 @@
 import { formatCurrency } from "../../utils/utils";
-import PopupReserva from "../reserva/PopupCrearReserva";
+import PopupCearReserva from "../reserva/PopupCrearReserva";
 
 export default class HabitacionItem {
   constructor(data) {
@@ -31,7 +31,7 @@ export default class HabitacionItem {
         })
       );
 
-      const popupReserva = new PopupReserva();
+      const popupReserva = new PopupCearReserva();
       const popup = popupReserva.generatePopup();
       popup.querySelector("#habitacion_numero").textContent = this._numero;
       popup.querySelector("#habitacion_categoria").textContent =

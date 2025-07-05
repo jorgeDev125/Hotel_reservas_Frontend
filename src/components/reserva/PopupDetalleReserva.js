@@ -6,7 +6,7 @@ import PopupCliente from "../cliente/PopupCliente";
 import HabitacionItem from "../habitacion/HabitacionItem";
 import ReservaItem from "./ReservaItem";
 
-export default class PopupCearReserva {
+export default class PopupDetalleReserva {
   constructor() {}
 
   _getTemplate() {
@@ -184,12 +184,13 @@ export default class PopupCearReserva {
           numeroNoches: formData.get("resumen_noches"),
           habitacionId: formData.get("habitacion_id"),
         };
-
+        
         //const cedulaStorage = localStorage.getItem("cedula_para_popup");
         const habitacionStorage = localStorage.getItem("habitacion_para_popup");
-
-        if (reservaData.clienteId === "") {
-          alert("Ingresa un número de cédula y busca el cliente");
+        
+        if (reservaData.clienteId ==="") {
+          alert("Ingresa un número de cédula y busca el cliente")
+          
         }
 
         apiReservaInstance
@@ -239,7 +240,7 @@ export default class PopupCearReserva {
                     });
                     this.close(); // Cerrar el popup después de crear el reserva
                     alert("Reserva creada exitosamente");
-                    localStorage.removeItem("habitacion_para_popup");
+                    localStorage.removeItem("habitacion_para_popup")
                   } else {
                     const p = document.createElement("p");
                     p.classList.add(

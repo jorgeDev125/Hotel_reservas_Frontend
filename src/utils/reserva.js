@@ -1,5 +1,5 @@
 import { ApiReserva } from "../components/reserva/ApiReserva";
-import PopupReserva from "../components/reserva/PopupCrearReserva";
+import PopupCearReserva from "../components/reserva/PopupCrearReserva";
 import ReservaItem from "../components/reserva/ReservaItem";
 import ReservaView from "../components/reserva/ReservaView";
 import { apiClienteInstance } from "./clientes";
@@ -16,7 +16,7 @@ export async function renderReservaView() {
   const habitacion = JSON.parse(localStorage.getItem("habitacion_para_popup"));
   if (habitacion) {
     // Aquí tu lógica para abrir el popup y poner la habitacion
-    const popupReserva = new PopupReserva();
+    const popupReserva = new PopupCearReserva();
     const popup = popupReserva.generatePopup();
     popup.querySelector("#habitacion_numero").textContent = habitacion.numero;
     popup.querySelector("#habitacion_categoria").textContent =

@@ -1,4 +1,4 @@
-import PopupReserva from "./PopupCrearReserva";
+import PopupCearReserva from "./PopupCrearReserva";
 
 export default class ReservaView {
   constructor() {}
@@ -17,7 +17,7 @@ export default class ReservaView {
     this._element
       .querySelector("#addReservaButton")
       .addEventListener("click", () => {
-        const popupReserva = new PopupReserva();
+        const popupReserva = new PopupCearReserva();
         const popup = popupReserva.generatePopup();
         popupReserva.open();
         document.querySelector(".popupReserva").prepend(popup);

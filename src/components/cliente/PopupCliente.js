@@ -1,5 +1,5 @@
 import { apiClienteInstance } from "../../utils/clientes";
-import PopupReserva from "../reserva/PopupCrearReserva";
+import PopupCearReserva from "../reserva/PopupCrearReserva";
 import ClienteItem from "./ClienteItem";
 
 export default class PopupCliente {
@@ -105,7 +105,7 @@ export default class PopupCliente {
               });
             } else {
               // Aquí tu lógica para abrir el popup y poner la cédula
-              const popupReserva = new PopupReserva();
+              const popupReserva = new PopupCearReserva();
               const popup = popupReserva.generatePopup();
               popup.querySelector("#cedula").value = cedulaStorage;
               apiClienteInstance
