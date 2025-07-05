@@ -1,8 +1,10 @@
-export function formatCurrency (amount) {
-    return new Intl.NumberFormat("en-US", {
+export function formatCurrency(amount) {
+    return new Intl.NumberFormat("es-CO", {
         style: "currency",
-        currency: "USD"
-    }).format(amount)
+        currency: "COP",
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 0
+    }).format(amount);
 }
 
 export function formatDateTime(fechaISO) {
@@ -15,4 +17,4 @@ export function formatDateTime(fechaISO) {
     minute: '2-digit',
     hour12: true
   });
-}
+} 
