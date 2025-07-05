@@ -2,7 +2,6 @@ import { ApiReserva } from "../components/reserva/ApiReserva";
 import PopupCearReserva from "../components/reserva/PopupCrearReserva";
 import ReservaItem from "../components/reserva/ReservaItem";
 import ReservaView from "../components/reserva/ReservaView";
-import { apiClienteInstance } from "./clientes";
 import { apiInstanceConfig } from "./constants";
 
 //crea instancia de la clase ApiReserva

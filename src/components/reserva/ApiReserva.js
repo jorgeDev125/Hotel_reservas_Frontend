@@ -21,6 +21,11 @@ export class ApiReserva extends Api {
     return await this._makeRequest("/reservas", "POST", reservacion);
     }   
 
+    // buscar reservaciones por Id
+    async buscarReservacionesPorId(id) {
+        return await this._makeRequest(`/reservas/${id}`);
+    }
+
     // actualizar una habitación
     // async actualizarHabitacion(id, habitacion) {
     // return await this._makeRequest(`/habitaciones/${id}`, "PUT", habitacion);

@@ -59,6 +59,10 @@
       <div
         class="popupReserva hidden fixed w-md items-center justify-center z-50"
       ></div>
+      
+      <div
+        class="popupDetalleReserva hidden fixed w-md items-center justify-center z-50"
+      ></div>
 
       <footer class="flex justify-center items-center text-white p-4 mt-4">
         <p>&copy; 2025 Control Reservas Hotel</p>
@@ -363,7 +367,7 @@
                 id="selectHabitacion"
                 name="selectHabitacion"
                 class="p-2 rounded bg-gray-700 text-white"
-               required
+                required
               >
                 <option value="">---</option>
                 <!-- Opciones se llenarán dinámicamente -->
@@ -452,9 +456,7 @@
               </div>
               <div class="mt-2 flex gap-6">
                 <span class="text-gray-400">Precio de la reservación:</span>
-                <span id="precio_total" class="text-white font-bold"
-                  >$</span
-                >
+                <span id="precio_total" class="text-white font-bold">$</span>
               </div>
             </div>
           </div>
@@ -467,7 +469,7 @@
             required
             value=""
           />
-            <input
+          <input
             type="number"
             name="cliente_id"
             hidden
@@ -483,6 +485,129 @@
             Hacer Reservación
           </button>
         </form>
+      </div>
+    </template>
+
+    <!-- Popup Reserva Resnume -->
+
+    <template id="reservaDetallePopup-template">
+      <div
+        class="detalleContainer relative w-full max-w-3xl h-fit p-4 bg-gray-800 rounded-lg shadow-lg z-50 flex flex-col gap-4"
+      >
+        <!-- Botón cerrar -->
+        <button
+          id="closeDetalleReserva"
+          class="absolute top-2 right-2 hover:bg-gray-700 text-white p-1 rounded"
+          type="button"
+        >
+          <img
+            src="./src/images/icons8-close-50.png"
+            alt="Cerrar"
+            class="w-5 h-5"
+          />
+        </button>
+        <!-- Título -->
+        <h2 class="text-xl font-bold text-white text-center">
+          Detalle de la Reservación
+        </h2>
+        <!-- Sección de información general -->
+        <div class="grid grid-cols-2 gap-4 text-sm text-white">
+          <div>
+            <div class="bg-gray-700 px-3 pt-3 pb-2 border-2 border-gray-500 rounded-t-lg">
+              <h3 class="text-white uppercase font-semibold mb-2">Reserva</h3>
+              <p class="flex justify-between">
+                <span class=" text-gray-300">No.:</span>
+                <span id="reserva_numero" class="ml-2">#12345</span>
+              </p>
+              <p class="flex justify-between">
+                <span class=" text-gray-300">Fecha registro:</span>
+                <span id="reserva_fecha" class="ml-2">2025-07-05</span>
+              </p>
+              <p class="flex justify-between">
+                <span class=" text-gray-300">No. noches:</span>
+                <span id="reserva_noches" class="ml-2">3</span>
+              </p>
+            </div>
+            <div class="flex justify-between p-2 rounded-b-lg bg-gray-500">
+              <span class=" text-gray-300">Estado:</span>
+              <span id="reserva_estado" class="ml-2 uppercase font-bold">Pendiente</span>
+            </div>
+          </div>
+
+          
+          <div class="bg-gray-700 p-3 rounded-lg">
+            <h3 class="text-white uppercase font-semibold mb-2">Cliente</h3>
+            <p class="flex justify-between">
+              <span class=" text-gray-400">Cédula:</span>
+              <span id="cliente_cedula" class="ml-2">123456789</span>
+            </p>
+            <p class="flex justify-between">
+              <span class=" text-gray-400">Nombre:</span>
+              <span id="cliente_nombre" class="ml-2">Juan Pérez</span>
+            </p>
+            <p class="flex justify-between">
+              <span class=" text-gray-400">Teléfono:</span>
+              <span id="cliente_telefono" class="ml-2">3001234567</span>
+            </p>
+            <p class="flex justify-between">
+              <span class=" text-gray-400">Email:</span>
+              <span id="cliente_email" class="ml-2">juan@email.com</span>
+            </p>
+          </div>
+        </div>
+        <!-- Sección de habitación -->
+        <div class="bg-gray-700 p-3 rounded-lg">
+          <h3 class="text-white uppercase font-semibold mb-2">Habitación</h3>
+          <div class="grid grid-cols-2 gap-x-4 text-sm mb-2">
+            <div class="flex justify-between">
+              <span class=" text-gray-400">No.:</span>
+              <span id="habitacion_numero" class="ml-2 text-white">101</span>
+            </div>
+            <div class="flex justify-between">
+              <span class=" text-gray-400">Categoría:</span>
+              <span id="habitacion_categoria" class="ml-2 text-white">Doble</span>
+            </div>
+            <div class="flex justify-between">
+              <span class=" text-gray-400">Precio por noche:</span>
+              <span id="habitacion_precio" class="ml-2 text-white">$80.000</span>
+            </div>
+            <div class="flex justify-between">
+              <span class=" text-gray-400"
+                >Estado habitación:</span
+              >
+              <span id="habitacion_estado" class="ml-2 text-white">Ocupada</span>
+            </div>
+          </div>
+          <div
+            class="flex justify-between items-center border-t border-gray-600 pt-2 mt-2"
+          >
+            <span class="font-semibold text-gray-300">Precio total:</span>
+            <span id="precio_total" class="text-white font-bold text-lg"
+              >$240.000</span
+            >
+          </div>
+        </div>
+        <!-- Acciones -->
+        <div class="flex gap-3 mt-4">
+          <button
+            id="btnActivar"
+            class="flex-1 bg-green-600 hover:bg-green-500 text-white font-semibold py-2 px-4 rounded"
+          >
+            Activar
+          </button>
+          <button
+            id="btnCompletar"
+            class="flex-1 bg-blue-600 hover:bg-blue-500 text-white font-semibold py-2 px-4 rounded"
+          >
+            Completar
+          </button>
+          <button
+            id="btnCancelar"
+            class="flex-1 bg-red-600 hover:bg-red-500 text-white font-semibold py-2 px-4 rounded"
+          >
+            Cancelar
+          </button>
+        </div>
       </div>
     </template>
 

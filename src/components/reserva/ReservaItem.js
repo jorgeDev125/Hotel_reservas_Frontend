@@ -1,4 +1,6 @@
+import { apiReservaInstance } from "../../utils/reserva";
 import { formatDateTime } from "../../utils/utils";
+import PopupDetalleReserva from "./PopupDetalleReserva";
 
 export default class ReservaItem {
   constructor(data) {
@@ -6,13 +8,17 @@ export default class ReservaItem {
     this._fecha_registro = data.fecha_registro;
     this._numero_noches = data.numero_noches;
     this._numero_habitacion = data.numero_habitacion;
-    this._categoria = data.categoria;
     this._precio_habitacion = data.precio_habitacion;
+    this._categoria = data.categoria;
+    this._estado_habitacion = data.estado_habitacion;
     this._cedula = data.cedula;
     this._nombre_cliente = data.nombre_cliente;
     this._apellido_cliente = data.apellido_cliente;
+    this._telefono_cliente = data.telefono_cliente;
+    this._email_cliente = data.email_cliente;
     this._precio_reserva = data.precio_reserva;
     this._estado_reserva = data.estado_reserva;
+    this._data = data
   }
 
   //función para clonar la plantilla
@@ -27,7 +33,15 @@ export default class ReservaItem {
   _setEventListeners() {
     // Agregar el evento para el botón de editar
     this._element.addEventListener("click", () => {
-      console.log(this._reserva_id);
+     
+      const popupDetalleReserva = new PopupDetalleReserva(this._data);
+      const popup = popupDetalleReserva.generatePopup();
+      // popup.querySelector("#habitacion_numero").textContent = habitacion.numero;
+      // popup.querySelector("#habitacion_categoria").textContent =
+      //   habitacion.categoria;
+      // popup.querySelector("#habitacion_precio").textContent = habitacion.precio;
+      popupDetalleReserva.open();
+      document.querySelector(".popupDetalleReserva").prepend(popup);
     });
     // Agregar el evento para el botón de eliminar
   }
