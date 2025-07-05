@@ -35,7 +35,7 @@
           class="w-44 cursor-pointer hover:bg-gray-600 py-1 rounded-md"
           id="btnReserve"
         >
-          Reservas
+          Reservaciones
         </button>
         <button
           class="w-44 cursor-pointer hover:bg-gray-600 py-1 rounded-md"
@@ -45,19 +45,19 @@
         </button>
       </nav>
     </div>
-    <section class="flex-1 px-4 pb-4 bg-gray-800">
+    <section class="flex flex-col w-full justify-start px-4 pb-4 bg-gray-800">
       <div id="content" class="w-auto"></div>
 
       <div
-        class="overlay hidden fixed inset-0 top-0 left-0 w-screen h-screen cursor-pointer bg-black opacity-80 z-40"
+        class="overlay hidden fixed top-0 left-0 w-screen h-screen cursor-pointer bg-black opacity-90 z-40"
       ></div>
 
       <div
-        class="popupCliente hidden fixed inset-0 items-center justify-center z-50"
+        class="popupCliente hidden fixed w-sm items-center justify-center z-50"
       ></div>
 
       <div
-        class="popupReserva hidden fixed inset-0 items-center justify-center z-50"
+        class="popupReserva hidden fixed w-md items-center justify-center z-50"
       ></div>
 
       <footer class="flex justify-center items-center text-white p-4 mt-4">
@@ -137,7 +137,7 @@
     <!-- Plantilla popupCliente -->
     <template id="clientePopup-template">
       <div
-        class="cliente__form relative w-sm flex-col p-4 bg-gray-800 rounded-lg gap-4 shadow-lg  mx-3 z-100"
+        class="cliente__form relative w-full flex-col p-4 bg-gray-800 rounded-lg gap-4 shadow-lg z-100"
       >
         <button
           id="closeClienteFormButton"
@@ -162,6 +162,7 @@
             id="cedula"
             name="cedula"
             class="p-2 rounded bg-gray-700 text-white"
+            autocomplete="off"
             required
           />
 
@@ -237,7 +238,7 @@
         class="room__card flex flex-col gap-1 text-white border-2 bg-gray-600 rounded-md shadow-lg min-w-fit cursor-pointer"
       >
         <div class="room__card-info flex justify-between px-4 pt-2">
-          <p class="text-4xl font-bold flex-wrap">
+          <p class="text-3xl font-bold flex-wrap">
             Hab: <span class="room__card-number">203</span>
           </p>
           <img
@@ -314,7 +315,7 @@
     <!-- Plantilla PopupReserva -->
     <template id="reservaPopup-template">
       <div
-        class="reserva__form relative w-[500px] flex-col p-4 bg-gray-800 rounded-lg gap-4 mx-3 shadow-lg z-100"
+        class="reserva__form relative w-full flex-col p-4 bg-gray-800 rounded-lg gap-4 shadow-lg z-100"
       >
         <button
           id="closeReservaFormButton"
@@ -329,46 +330,160 @@
         </button>
 
         <h2 class="form_title text-xl font-bold text-white mb-4">
-          Crear Reservación
+          Crear Reserva
         </h2>
+
         <form id="reservaForm" class="flex flex-col gap-3">
-          <label for="cedula" class="text-white">Cédula:</label>
+          <div class="flex gap-2">
+            <div class="flex-1">
+              <label for="cedula" class="text-white">No. de cédula:</label>
+              <input
+                type="number"
+                placeholder="Input number"
+                id="cedula"
+                name="cedula"
+                class="p-2 rounded bg-gray-700 text-white w-full"
+                autocomplete="off"
+                min="1"
+              />
+            </div>
+            <button
+              type="button"
+              id="buscarClienteButton"
+              class="bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded mt-6"
+            >
+              Buscar cliente
+            </button>
+          </div>
+
+          <div class="flex flex-row justify-between items-center">
+            <div class="flex flex-row justify-between items-center gap-2">
+              <label for="habitacion" class="text-white">Habitación:</label>
+              <select
+                id="selectHabitacion"
+                name="selectHabitacion"
+                class="p-2 rounded bg-gray-700 text-white"
+               required
+              >
+                <option value="">---</option>
+                <!-- <option value="1">101</option>
+                <option value="3">103</option>
+ -->
+                <!-- Opciones se llenarán dinámicamente -->
+              </select>
+            </div>
+            <div class="flex flex-row justify-between items-center gap-2">
+              <label for="numero_noches" class="text-white"
+                >No de noches:</label
+              >
+              <select
+                id="numero_noches"
+                name="numero_noches"
+                class="p-2 rounded bg-gray-700 text-white"
+                required
+              >
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="resumen_reserva bg-gray-700 p-4 rounded relative">
+            <h3
+              class="text-gray-400 font-bold uppercase mb-3 absolute top-2 right-4"
+            >
+              Resumen de la Reservación
+            </h3>
+
+            <div class="cliente_info mb-3">
+              <h4 class="text-white font-semibold mb-2">Cliente</h4>
+              <div class="grid grid-cols-2 gap-2 text-sm">
+                <div>
+                  <span class="text-gray-400">No. de cédula:</span>
+                  <span id="cliente_cedula" class="text-white block"></span>
+                </div>
+                <div>
+                  <span class="text-gray-400">Nombre:</span>
+                  <span id="cliente_nombre" class="text-white block"></span>
+                </div>
+                <div>
+                  <span class="text-gray-400">Teléfono:</span>
+                  <span id="cliente_telefono" class="text-white block"></span>
+                </div>
+                <div>
+                  <span class="text-gray-400">e-mail:</span>
+                  <span id="cliente_email" class="text-white block"></span>
+                </div>
+              </div>
+            </div>
+
+            <div class="habitacion_info">
+              <h4 class="text-white font-semibold mb-2">Habitación</h4>
+              <div class="grid grid-cols-2 gap-2 text-sm">
+                <div>
+                  <span class="text-gray-400">No.:</span>
+                  <span id="habitacion_numero" class="text-white">-</span>
+                </div>
+                <div>
+                  <span class="text-gray-400">Categoría:</span>
+                  <span id="habitacion_categoria" class="text-white">-</span>
+                </div>
+                <div>
+                  <span class="text-gray-400">Precio por noche:</span>
+                  <span id="habitacion_precio" class="text-white">-</span>
+                </div>
+                <div class="flex gap-2 w-full">
+                  <span class="text-gray-400">Número de noches:</span>
+                  <input
+                    type="number"
+                    readonly
+                    class="text-white w-10"
+                    id="resumen_noches"
+                    name="resumen_noches"
+                    min="1"
+                    value="1"
+                  />
+                </div>
+              </div>
+              <div class="mt-2 flex gap-6">
+                <span class="text-gray-400">Precio de la reservación:</span>
+                <span id="precio_total" class="text-white font-bold"
+                  >$</span
+                >
+              </div>
+            </div>
+          </div>
           <input
             type="number"
-            placeholder="Cédula del Cliente"
-            id="cedula"
-            name="cedula"
-            class="p-2 rounded bg-gray-700 text-white"
+            hidden
+            readonly
+            id="habitacion_id"
+            name="habitacion_id"
             required
+            value=""
           />
-
-          <label for="noches" class="text-white">Número de noches:</label>
-          <input
+            <input
             type="number"
-            placeholder="Número de noches"
-            id="noches"
-            name="noches"
-            class="p-2 rounded bg-gray-700 text-white"
+            name="cliente_id"
+            hidden
+            readonly
+            id="cliente_id"
+            value=""
             required
           />
-
-          <label for="habitacion" class="text-white">Habitación:</label>
-          <input
-            type="number"
-            placeholder="Habitación"
-            id="habitacion"
-            name="habitacion"
-            min="2"
-            max="50"
-            class="p-2 rounded bg-gray-700 text-white"
-            required
-          />
-
           <button
             type="submit"
             class="save_button bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded mt-3"
           >
-            Crear Reservación
+            Hacer Reservación
           </button>
         </form>
       </div>
