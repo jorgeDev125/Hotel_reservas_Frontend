@@ -1,6 +1,7 @@
 import { ApiCliente } from "../components/cliente/ApiClientes";
 import ClienteItem from "../components/cliente/ClienteItem";
 import ClienteView from "../components/cliente/ClienteView";
+import PopupCliente from "../components/cliente/PopupCliente";
 import { apiInstanceConfig } from "./constants";
 
 //crea instancia de la clase ApiCliente
@@ -10,6 +11,16 @@ export const apiClienteInstance = new ApiCliente(apiInstanceConfig);
 export async function renderClienteView() {
   const clienteVista = new ClienteView().generateView();
   const clientesLista = clienteVista.querySelector("#clientesList");
+
+  const cedula = localStorage.getItem("cedula_para_popup");
+  if (cedula) {
+    // Aquí tu lógica para abrir el popup y poner la cédula
+    const popupCliente = new PopupCliente();
+    const popup = popupCliente.generatePopup();
+    popup.querySelector("#cedula").value = cedula;
+    popupCliente.open();
+    document.querySelector(".popupCliente").prepend(popup);
+  }
 
   let usuarios = [];
   try {

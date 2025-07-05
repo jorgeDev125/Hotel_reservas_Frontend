@@ -21,6 +21,9 @@ export default class PopupCliente {
   open() {
     document.querySelector(".popupCliente").classList.remove("hidden");
     document.querySelector(".popupCliente").classList.add("flex");
+    document.querySelector(".popupCliente").style = `top: calc((100vh - 558px) / 2); 
+                                                    left: calc((100vw - 384px) / 2);`
+                                                                                                
     document.querySelector(".overlay").classList.remove("hidden");
     // Autoenfocar el input de cédula cuando se abre el modal
     setTimeout(() => {
@@ -54,15 +57,23 @@ export default class PopupCliente {
           email: formData.get("email") || null,
         };
 
+        const cedulaStorage = localStorage.getItem("cedula_para_popup");
+        
+
         // reactualizar la lista de clientes
         const clientesLista = document.querySelector("#clientesList");
         apiClienteInstance
           .crearCliente(clienteData)
           .then(() => {
-            clientesLista.innerHTML = ""; // Limpiar la lista actual
-
+          if (!cedulaStorage) {
+            clientesLista.textContent = ""; // Limpiar la lista actual
+  
             // Volver a cargar los clientes
             return apiClienteInstance.obtenerClientes();
+          } else {
+            window.location.href = "/reservas";    
+          }
+
           })
           .then((clientes) => {
             if (clientes && clientes.length > 0) {
@@ -71,6 +82,8 @@ export default class PopupCliente {
                   new ClienteItem(cliente).generateCustomer()
                 );
               });
+               this.close(); // Cerrar el popup después de crear el cliente
+              alert("Cliente creado exitosamente");
             } else {
               const p = document.createElement("p");
               p.classList.add(
@@ -83,26 +96,47 @@ export default class PopupCliente {
               p.textContent = "No hay clientes disponibles.";
               clientesLista.appendChild(p);
             }
-            this.close(); // Cerrar el popup después de crear el cliente
-            alert("Cliente creado exitosamente");
+           
           })
           .catch((error) => {
-            alert(error);
           });
       });
 
-    this._popup
-      .querySelector("#closeClienteFormButton")
-      .addEventListener("click", () => this.close());
-
-    document.addEventListener("keydown", (evt) => {
-      if (evt.key === "Escape") {
-        this.close();
-      }
+if (localStorage.getItem("cedula_para_popup")) {
+  this._popup
+    .querySelector("#closeClienteFormButton")
+    .addEventListener("click", () => {
+      localStorage.removeItem("cedula_para_popup");
+      this.close()
     });
-
-    document.querySelector(".overlay").addEventListener("click", () => {
+  
+  document.addEventListener("keydown", (evt) => {
+    if (evt.key === "Escape") {
+      localStorage.removeItem("cedula_para_popup");
       this.close();
-    });
+    }
+  });
+  
+  document.querySelector(".overlay").addEventListener("click", () => {
+    localStorage.removeItem("cedula_para_popup");
+    this.close();
+  });
+} else {
+  
+  this._popup
+    .querySelector("#closeClienteFormButton")
+    .addEventListener("click", () => this.close());
+  
+  document.addEventListener("keydown", (evt) => {
+    if (evt.key === "Escape") {
+      this.close();
+    }
+  });
+  
+  document.querySelector(".overlay").addEventListener("click", () => {
+    this.close();
+  });
+}
+
   }
 }
