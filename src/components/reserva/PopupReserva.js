@@ -235,6 +235,7 @@ export default class PopupReserva {
                     });
                     this.close(); // Cerrar el popup después de crear el reserva
                     alert("Reserva creada exitosamente");
+                    localStorage.removeItem("habitacion_para_popup")
                   } else {
                     const p = document.createElement("p");
                     p.classList.add(
