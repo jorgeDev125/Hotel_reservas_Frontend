@@ -1,4 +1,4 @@
-import PopupReserva from "./PopupReserva";
+import PopupReserva from "./PopupCrearReserva";
 
 export default class ReservaView {
   constructor() {}

@@ -1,5 +1,5 @@
 import { ApiReserva } from "../components/reserva/ApiReserva";
-import PopupReserva from "../components/reserva/PopupReserva";
+import PopupReserva from "../components/reserva/PopupCrearReserva";
 import ReservaItem from "../components/reserva/ReservaItem";
 import ReservaView from "../components/reserva/ReservaView";
 import { apiClienteInstance } from "./clientes";

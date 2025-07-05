@@ -1,5 +1,5 @@
 import { apiClienteInstance } from "../../utils/clientes";
-import PopupReserva from "../reserva/PopupReserva";
+import PopupReserva from "../reserva/PopupCrearReserva";
 import ClienteItem from "./ClienteItem";
 
 export default class PopupCliente {

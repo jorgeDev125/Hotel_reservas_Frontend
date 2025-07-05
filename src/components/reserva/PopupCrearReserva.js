@@ -28,7 +28,7 @@ export default class PopupReserva {
         habitaciones.forEach((h) => {
           const option = document.createElement("option");
           option.value = h.habitacion_id;
-          option.textContent = `Hab. ${h.numero}`;
+          option.textContent = `${h.numero}-${h.categoria}`;
           option.setAttribute("data-numero", h.numero);
           option.setAttribute("data-categoria", h.categoria);
           option.setAttribute("data-precio", h.precio);
@@ -184,9 +184,14 @@ export default class PopupReserva {
           numeroNoches: formData.get("resumen_noches"),
           habitacionId: formData.get("habitacion_id"),
         };
-
-        const cedulaStorage = localStorage.getItem("cedula_para_popup");
+        
+        //const cedulaStorage = localStorage.getItem("cedula_para_popup");
         const habitacionStorage = localStorage.getItem("habitacion_para_popup");
+        
+        if (reservaData.clienteId ==="") {
+          alert("Ingresa un número de cédula y busca el cliente")
+          
+        }
 
         apiReservaInstance
           .crearReservacion(reservaData)
@@ -252,7 +257,7 @@ export default class PopupReserva {
             }
           })
           .catch((error) => {
-            alert(error);
+            alert;
           });
       });
 

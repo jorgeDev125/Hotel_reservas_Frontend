@@ -1,5 +1,5 @@
 import { formatCurrency } from "../../utils/utils";
-import PopupReserva from "../reserva/PopupReserva";
+import PopupReserva from "../reserva/PopupCrearReserva";
 
 export default class HabitacionItem {
   constructor(data) {
