@@ -21,7 +21,6 @@ export default class ReservaView {
         const popup = popupReserva.generatePopup();
         popupReserva.open();
         document.querySelector(".popupReserva").prepend(popup);
-        console.log("crea reserva")
       });
   }
 

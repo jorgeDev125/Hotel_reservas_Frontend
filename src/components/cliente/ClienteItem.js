@@ -62,7 +62,7 @@ export default class ClienteItem {
             apiClienteInstance
               .actualizarCliente(this._cedula, clienteData)
               .then(() => {
-                clientesLista.innerHTML = ""; // Limpiar la lista actual
+                clientesLista.textContent = ""; // Limpiar la lista actual
 
                 // Volver a cargar los clientes
                 return apiClienteInstance.obtenerClientes();
@@ -97,12 +97,6 @@ export default class ClienteItem {
           console.error("Error al obtener el cliente:", error);
         }
       });
-    // Agregar el evento para el botón de eliminar
-    /* this._element
-      .querySelector("#customer__delete-button")
-      .addEventListener("click", () => {
-        console.log("Eliminar: " + this._clienteId);
-      }); */
   }
 
   generateCustomer() {

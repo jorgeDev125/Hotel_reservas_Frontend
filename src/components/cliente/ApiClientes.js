@@ -11,9 +11,8 @@ export class ApiCliente extends Api {
   }
 
   // Método para obtener un cliente por ID
-  obtenerClientePorId(clienteId) {
-    console.log(clienteId);
-    return this._makeRequest(`/clientes/${clienteId}`);
+  obtenerClientePorCedula(clienteCedula) {
+    return this._makeRequest(`/clientes/${clienteCedula}`);
   }
 
   // Método para crear un nuevo cliente

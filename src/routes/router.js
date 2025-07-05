@@ -14,7 +14,7 @@ export const ROUTER = {
   },
   render(path) {
     const content = document.getElementById("content");
-    content.innerHTML = "";
+    content.textContent = "";
     // Normaliza la ruta para ignorar barras, parámetros y queries
     const cleanPath = (path || "").replace(/^\//, "").split(/[/?#]/)[0];
     if (!(cleanPath in this.routes)) {
