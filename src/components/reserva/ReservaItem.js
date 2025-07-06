@@ -17,7 +17,7 @@ export default class ReservaItem {
     this._email_cliente = data.email_cliente;
     this._precio_reserva = data.precio_reserva;
     this._estado_reserva = data.estado_reserva;
-    this._data = data
+    this._data = data;
   }
 
   //función para clonar la plantilla
@@ -32,7 +32,6 @@ export default class ReservaItem {
   _setEventListeners() {
     // Agregar el evento para el botón de editar
     this._element.addEventListener("click", () => {
-     
       const popupDetalleReserva = new PopupDetalleReserva(this._data);
       const popup = popupDetalleReserva.generatePopup();
       popupDetalleReserva.open();
@@ -69,7 +68,7 @@ export default class ReservaItem {
           .querySelector(".reservation__icon")
           .classList.add("bg-gray-500");
         this._element.querySelector(".reservation__icon").src =
-          "./src/images/pendiente.png";
+          "images/pendiente.png";
         break;
       case "Activa":
         this._element.classList.add("border-amber-600");
@@ -80,7 +79,7 @@ export default class ReservaItem {
           .querySelector(".reservation__icon")
           .classList.add("bg-amber-600");
         this._element.querySelector(".reservation__icon").src =
-          "./src/images/activa.png";
+          "images/activa.png";
         break;
       case "Completada":
         this._element.classList.add("border-lime-600");
@@ -91,7 +90,7 @@ export default class ReservaItem {
           .querySelector(".reservation__icon")
           .classList.add("bg-lime-600");
         this._element.querySelector(".reservation__icon").src =
-          "./src/images/completada.png";
+          "images/completada.png";
         break;
       case "Cancelada":
         this._element.classList.add("border-red-700");
@@ -102,7 +101,7 @@ export default class ReservaItem {
           .querySelector(".reservation__icon")
           .classList.add("bg-red-700");
         this._element.querySelector(".reservation__icon").src =
-          "./src/images/no-disponible.png";
+          "images/no-disponible.png";
         break;
     }
 

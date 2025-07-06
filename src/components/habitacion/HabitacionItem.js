@@ -9,7 +9,7 @@ export default class HabitacionItem {
     this._categoria = data.categoria;
     this._precio = data.precio;
     this._estado = data.estado_habitacion;
-    this._data = data
+    this._data = data;
   }
 
   //función para clonar la plantilla
@@ -83,7 +83,7 @@ export default class HabitacionItem {
           .querySelector(".room-status__icon")
           .classList.add("bg-lime-600", "hover:bg-lime-500");
         this._element.querySelector(".room-status__icon").src =
-          "./src/images/disponible.png";
+          "images/disponible.png";
         break;
       case "Reservada":
         this._element.classList.add("border-gray-500");
@@ -94,7 +94,7 @@ export default class HabitacionItem {
           .querySelector(".room-status__icon")
           .classList.add("bg-gray-500", "hover:bg-gray-400");
         this._element.querySelector(".room-status__icon").src =
-          "./src/images/disponible.png";
+          "images/disponible.png";
         this._element
           .querySelector("#agregarReservaButton")
           .classList.add("hidden");
@@ -108,7 +108,7 @@ export default class HabitacionItem {
           .querySelector(".room-status__icon")
           .classList.add("bg-amber-600", "hover:bg-amber-500");
         this._element.querySelector(".room-status__icon").src =
-          "./src/images/ocupada.png";
+          "images/ocupada.png";
         this._element
           .querySelector("#agregarReservaButton")
           .classList.add("hidden");
@@ -122,7 +122,7 @@ export default class HabitacionItem {
           .querySelector(".room-status__icon")
           .classList.add("bg-blue-700", "hover:bg-blue-600");
         this._element.querySelector(".room-status__icon").src =
-          "./src/images/limpieza.png";
+          "images/limpieza.png";
         this._element
           .querySelector("#agregarReservaButton")
           .classList.add("hidden");
@@ -136,7 +136,7 @@ export default class HabitacionItem {
           .querySelector(".room-status__icon")
           .classList.add("bg-red-600", "hover:bg-red-500");
         this._element.querySelector(".room-status__icon").src =
-          "./src/images/no-disponible.png";
+          "images/no-disponible.png";
         this._element
           .querySelector("#agregarReservaButton")
           .classList.add("hidden");

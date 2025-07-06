@@ -100,7 +100,7 @@ export default class PopupDetalleReserva {
           .querySelector(".reservation__icon")
           .classList.add("bg-gray-500");
         this._element.querySelector(".reservation__icon").src =
-          "./src/images/pendiente.png"; */
+          "images/pendiente.png"; */
         break;
       case "Activa":
         this._popup
@@ -126,7 +126,7 @@ export default class PopupDetalleReserva {
           .querySelector(".reservation__icon")
           .classList.add("bg-amber-600");
         this._element.querySelector(".reservation__icon").src =
-          "./src/images/activa.png"; */
+          "images/activa.png"; */
 
         break;
       case "Completada":
@@ -242,28 +242,30 @@ export default class PopupDetalleReserva {
           reservasLista.textContent = ""; // Limpiar la lista actual
 
           // Volver a cargar los reservas
-          return await apiReservaInstance.obtenerReservaciones().then((reservas) => {
-            if (reservas && reservas.length > 0) {
-              reservas.forEach((reserva) => {
-                reservasLista.appendChild(
-                  new ReservaItem(reserva).generateReserva()
+          return await apiReservaInstance
+            .obtenerReservaciones()
+            .then((reservas) => {
+              if (reservas && reservas.length > 0) {
+                reservas.forEach((reserva) => {
+                  reservasLista.appendChild(
+                    new ReservaItem(reserva).generateReserva()
+                  );
+                });
+                this.close(); // Cerrar el popup después de crear el reserva
+                alert("Reservación activada correctamente");
+              } else {
+                const p = document.createElement("p");
+                p.classList.add(
+                  "text-white",
+                  "text-center",
+                  "w-full",
+                  "text-lg",
+                  "font-bold"
                 );
-              });
-              this.close(); // Cerrar el popup después de crear el reserva
-              alert("Reservación activada correctamente");
-            } else {
-              const p = document.createElement("p");
-              p.classList.add(
-                "text-white",
-                "text-center",
-                "w-full",
-                "text-lg",
-                "font-bold"
-              );
-              p.textContent = "No hay reservacioness disponibles.";
-              reservasLista.appendChild(p);
-            }
-          });
+                p.textContent = "No hay reservacioness disponibles.";
+                reservasLista.appendChild(p);
+              }
+            });
         });
     });
 
