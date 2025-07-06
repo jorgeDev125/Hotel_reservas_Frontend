@@ -174,11 +174,6 @@ export default class PopupDetalleReserva {
         this._popup
           .querySelector("#btnCancelar")
           .classList.add("bg-gray-600", "cursor-not-allowed", "text-gray-400");
-        /*   this._element
-          .querySelector(".reservation__icon")
-          .classList.add("bg-lime-600");
-        this._element.querySelector(".reservation__icon").src =
-          "./src/images/completada.png"; */
         break;
       case "Cancelada":
         this._popup
@@ -225,11 +220,6 @@ export default class PopupDetalleReserva {
         this._popup
           .querySelector("#btnCancelar")
           .classList.add("bg-gray-600", "cursor-not-allowed", "text-gray-400");
-        /*  this._element
-          .querySelector(".reservation__icon")
-          .classList.add("bg-red-700");
-        this._element.querySelector(".reservation__icon").src =
-          "./src/images/no-disponible.png"; */
         break;
     }
   }
@@ -252,7 +242,7 @@ export default class PopupDetalleReserva {
           reservasLista.textContent = ""; // Limpiar la lista actual
 
           // Volver a cargar los reservas
-          return apiReservaInstance.obtenerReservaciones().then((reservas) => {
+          return await apiReservaInstance.obtenerReservaciones().then((reservas) => {
             if (reservas && reservas.length > 0) {
               reservas.forEach((reserva) => {
                 reservasLista.appendChild(

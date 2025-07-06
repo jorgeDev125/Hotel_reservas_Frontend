@@ -33,7 +33,7 @@ export class ApiReserva extends Api {
     }   
     
     //obtner reservadas agrupadas por estado
-    async actualizarEstadoReservacion() {
+    async agruparReservasPorEstado() {
     return await this._makeRequest(`/reservas/estados`);
     }   
     
