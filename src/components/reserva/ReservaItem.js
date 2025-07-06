@@ -1,4 +1,3 @@
-import { apiReservaInstance } from "../../utils/reserva";
 import { formatDateTime } from "../../utils/utils";
 import PopupDetalleReserva from "./PopupDetalleReserva";
 
@@ -36,10 +35,6 @@ export default class ReservaItem {
      
       const popupDetalleReserva = new PopupDetalleReserva(this._data);
       const popup = popupDetalleReserva.generatePopup();
-      // popup.querySelector("#habitacion_numero").textContent = habitacion.numero;
-      // popup.querySelector("#habitacion_categoria").textContent =
-      //   habitacion.categoria;
-      // popup.querySelector("#habitacion_precio").textContent = habitacion.precio;
       popupDetalleReserva.open();
       document.querySelector(".popupDetalleReserva").prepend(popup);
     });
