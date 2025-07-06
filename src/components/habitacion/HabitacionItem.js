@@ -1,6 +1,6 @@
-import { apiHabitacionInstance } from "../../utils/habitacion";
 import { formatCurrency } from "../../utils/utils";
 import PopupCearReserva from "../reserva/PopupCrearReserva";
+import PopupEditarEstadoHab from "./PopupEditarEstado";
 
 export default class HabitacionItem {
   constructor(data) {
@@ -9,6 +9,7 @@ export default class HabitacionItem {
     this._categoria = data.categoria;
     this._precio = data.precio;
     this._estado = data.estado_habitacion;
+    this._data = data
   }
 
   //función para clonar la plantilla
@@ -23,124 +24,39 @@ export default class HabitacionItem {
   _setEventListeners() {
     // Agregar el evento para abrir el popup de reserva
 
-    this._element.querySelector("#agregarReservaButton").addEventListener("click", () => {
-      localStorage.setItem(
-            "habitacion_para_popup",
-            JSON.stringify({
-              numero: this._numero,
-              categroia: this._categoria,
-              precio: this._precio,
-            })
-          );
+    this._element
+      .querySelector("#agregarReservaButton")
+      .addEventListener("click", () => {
+        localStorage.setItem(
+          "habitacion_para_popup",
+          JSON.stringify({
+            numero: this._numero,
+            categroia: this._categoria,
+            precio: this._precio,
+          })
+        );
 
-          const popupReserva = new PopupCearReserva();
-          const popup = popupReserva.generatePopup();
-          popup.querySelector("#habitacion_numero").textContent = this._numero;
-          popup.querySelector("#habitacion_categoria").textContent =
-            this._categoria;
-          popup.querySelector("#habitacion_precio").textContent =
-            formatCurrency(this._precio);
-          popup.querySelector("#habitacion_id").value = this._habitacionId;
-          popupReserva.open();
-          document.querySelector(".popupReserva").prepend(popup);
-    })
+        const popupReserva = new PopupCearReserva();
+        const popup = popupReserva.generatePopup();
+        popup.querySelector("#habitacion_numero").textContent = this._numero;
+        popup.querySelector("#habitacion_categoria").textContent =
+          this._categoria;
+        popup.querySelector("#habitacion_precio").textContent = formatCurrency(
+          this._precio
+        );
+        popup.querySelector("#habitacion_id").value = this._habitacionId;
+        popupReserva.open();
+        document.querySelector(".popupReserva").prepend(popup);
+      });
 
-    this._element.querySelector(".room-status__icon").addEventListener("click", () => {
-      switch (this._estado) {
-        case "Disponible":
-          console.log("disponible")
-          /* localStorage.setItem(
-            "habitacion_para_popup",
-            JSON.stringify({
-              numero: this._numero,
-              categroia: this._categoria,
-              precio: this._precio,
-            })
-          );
-
-          const popupReserva = new PopupCearReserva();
-          const popup = popupReserva.generatePopup();
-          popup.querySelector("#habitacion_numero").textContent = this._numero;
-          popup.querySelector("#habitacion_categoria").textContent =
-            this._categoria;
-          popup.querySelector("#habitacion_precio").textContent =
-            formatCurrency(this._precio);
-          popup.querySelector("#habitacion_id").value = this._habitacionId;
-          popupReserva.open();
-          document.querySelector(".popupReserva").prepend(popup); */
-          break;
-        case "Reservada":
-          alert("La habitación está reservada");
-          break;
-
-        case "Ocupada":
-          alert("La habitación está ocupada");
-          break;
-        case "En Limpieza":
-          if (window.confirm("¿Quieres activar la habitación?")) {
-            // El usuario hizo clic en "Aceptar"
-            apiHabitacionInstance.cambiarEstadoHabitacion(this._habitacionId, 1)
-            //refrescar la página
-            const habitacionLista = document.querySelector("#roomList");
-            habitacionLista.textContent = ""; // Limpiar la lista actual
-              return apiHabitacionInstance
-                .obtenerHabitaciones()
-                .then((habitaciones) => {
-                  if (habitaciones && habitaciones.length > 0) {
-                    habitaciones.forEach((habitacion) => {
-                      habitacionLista.appendChild(
-                        new HabitacionItem(habitacion).generateRoom()
-                      );
-                    });
-                 } else {
-                    const p = document.createElement("p");
-                    p.classList.add(
-                      "text-white",
-                      "text-center",
-                      "w-full",
-                      "text-lg",
-                      "font-bold"
-                    );
-                    p.textContent = "No hay Habitaciones.";
-                    habitacionLista.appendChild(p);
-                  }
-                });
-          } 
-          break;
-        case "No Disponible":
-            if (window.confirm("¿Quieres activar la habitación?")) {
-            // El usuario hizo clic en "Aceptar"
-            apiHabitacionInstance.cambiarEstadoHabitacion(this._habitacionId, 1)
-            //refrescar la página
-            const habitacionLista = document.querySelector("#roomList");
-            habitacionLista.textContent = ""; // Limpiar la lista actual
-              return apiHabitacionInstance
-                .obtenerHabitaciones()
-                .then((habitaciones) => {
-                  if (habitaciones && habitaciones.length > 0) {
-                    habitaciones.forEach((habitacion) => {
-                      habitacionLista.appendChild(
-                        new HabitacionItem(habitacion).generateRoom()
-                      );
-                    });
-                 } else {
-                    const p = document.createElement("p");
-                    p.classList.add(
-                      "text-white",
-                      "text-center",
-                      "w-full",
-                      "text-lg",
-                      "font-bold"
-                    );
-                    p.textContent = "No hay Habitaciones.";
-                    habitacionLista.appendChild(p);
-                  }
-                });
-          } 
-
-          break;
-      }
-    });
+    this._element
+      .querySelector(".room-status__icon")
+      .addEventListener("click", () => {
+        const popupEstadoHab = new PopupEditarEstadoHab(this._data);
+        const popup = popupEstadoHab.generatePopup();
+        popupEstadoHab.open();
+        document.querySelector(".popupEstadoHabitacion").prepend(popup);
+      });
   }
 
   generateRoom() {
@@ -179,7 +95,9 @@ export default class HabitacionItem {
           .classList.add("bg-gray-500", "hover:bg-gray-400");
         this._element.querySelector(".room-status__icon").src =
           "./src/images/disponible.png";
-        this._element.querySelector("#agregarReservaButton").classList.add("hidden")
+        this._element
+          .querySelector("#agregarReservaButton")
+          .classList.add("hidden");
         break;
       case "Ocupada":
         this._element.classList.add("border-amber-600");
@@ -191,7 +109,9 @@ export default class HabitacionItem {
           .classList.add("bg-amber-600", "hover:bg-amber-500");
         this._element.querySelector(".room-status__icon").src =
           "./src/images/ocupada.png";
-        this._element.querySelector("#agregarReservaButton").classList.add("hidden")
+        this._element
+          .querySelector("#agregarReservaButton")
+          .classList.add("hidden");
         break;
       case "En Limpieza":
         this._element.classList.add("border-blue-700");
@@ -203,7 +123,9 @@ export default class HabitacionItem {
           .classList.add("bg-blue-700", "hover:bg-blue-600");
         this._element.querySelector(".room-status__icon").src =
           "./src/images/limpieza.png";
-        this._element.querySelector("#agregarReservaButton").classList.add("hidden")
+        this._element
+          .querySelector("#agregarReservaButton")
+          .classList.add("hidden");
         break;
       case "No Disponible":
         this._element.classList.add("border-red-600");
@@ -215,7 +137,9 @@ export default class HabitacionItem {
           .classList.add("bg-red-600", "hover:bg-red-500");
         this._element.querySelector(".room-status__icon").src =
           "./src/images/no-disponible.png";
-        this._element.querySelector("#agregarReservaButton").classList.add("hidden")
+        this._element
+          .querySelector("#agregarReservaButton")
+          .classList.add("hidden");
         break;
     }
 

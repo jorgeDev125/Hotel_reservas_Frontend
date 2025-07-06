@@ -63,6 +63,10 @@
       <div
         class="popupDetalleReserva hidden fixed w-md items-center justify-center z-50"
       ></div>
+      
+      <div
+        class="popupEstadoHabitacion hidden fixed w-md items-center justify-center z-50"
+      ></div>
 
       <footer class="flex justify-center items-center text-white p-4 mt-4">
         <p>&copy; 2025 Control Reservas Hotel</p>
@@ -227,14 +231,14 @@
     <template id="roomViewTemplate">
       <div class="room__view flex flex-col px-4 pb-4 bg-gray-800">
         <div
-          class="flex flex-row justify-between py-4 bg-gray-800 sticky top-0 z-50"
+          class="flex flex-row justify-between py-4 bg-gray-800 sticky top-0 z-2"
         >
           <h1 class="text-2xl font-bold text-white">Habitaciones</h1>
         </div>
 
         <div
           id="roomList"
-          class="flex flex-row flex-wrap gap-4 w-full z-40"
+          class="flex flex-row flex-wrap gap-4 w-full z-1"
         ></div>
       </div>
     </template>
@@ -638,7 +642,7 @@
     <!-- planilla para editar estado de habitación -->
     <template id="editarEstadoHabitacionPopup-template">
       <div
-        class="relative w-full max-w-md mx-auto p-6 bg-gray-800 rounded-lg shadow-lg h-fit z-100"
+        class="editar_estado_container relative w-full max-w-md mx-auto p-6 bg-gray-800 rounded-lg shadow-lg h-fit z-100"
       >
         <!-- Botón de cerrar -->
         <button
