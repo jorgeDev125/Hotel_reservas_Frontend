@@ -31,21 +31,11 @@ export class ApiReserva extends Api {
     async actualizarEstadoReservacion(id, estadoId) {
     return await this._makeRequest(`/reservas/${id}/estado`, "PUT", estadoId);
     }   
-
-    // actualizar una habitación
-    // async actualizarHabitacion(id, habitacion) {
-    // return await this._makeRequest(`/habitaciones/${id}`, "PUT", habitacion);
-    // }   
-
-    //eliminar una habitación
-    // async eliminarHabitacion(id) {  
-    // return await this._makeRequest(`/habitaciones/${id}`, "DELETE");
-    // }   
-
     
-    //buscar reservaciones por estado
-    // async buscarReservacionesPorEstado(estado) {
-    //     return await this._makeRequest(`/reservas/estado/${estado}`);
-    // }
+    //obtner reservadas agrupadas por estado
+    async actualizarEstadoReservacion() {
+    return await this._makeRequest(`/reservas/estados`);
+    }   
+    
 
 }

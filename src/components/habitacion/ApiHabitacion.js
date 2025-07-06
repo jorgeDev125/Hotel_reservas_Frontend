@@ -39,5 +39,9 @@ export class ApiHabitacion extends Api {
     async buscarHabitacionesPorEstado(estadoId) {
         return await this._makeRequest(`/habitaciones/estado/${estadoId}`);
     }
+    //buscar habitaciones por estado
+    async agruparHabitacionesPorEstado() {
+        return await this._makeRequest(`/habitaciones/estados`);
+    }
 
 }
