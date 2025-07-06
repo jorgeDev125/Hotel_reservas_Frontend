@@ -59,7 +59,7 @@
       <div
         class="popupReserva hidden fixed w-md items-center justify-center z-50"
       ></div>
-      
+
       <div
         class="popupDetalleReserva hidden fixed w-md items-center justify-center z-50"
       ></div>
@@ -227,20 +227,35 @@
     <template id="roomViewTemplate">
       <div class="room__view flex flex-col px-4 pb-4 bg-gray-800">
         <div
-          class="flex flex-row justify-between py-4 bg-gray-800 sticky top-0"
+          class="flex flex-row justify-between py-4 bg-gray-800 sticky top-0 z-50"
         >
           <h1 class="text-2xl font-bold text-white">Habitaciones</h1>
         </div>
 
-        <div id="roomList" class="flex flex-row flex-wrap gap-4 w-full"></div>
+        <div
+          id="roomList"
+          class="flex flex-row flex-wrap gap-4 w-full z-40"
+        ></div>
       </div>
     </template>
 
     <!-- Plantill RoomItem -->
     <template id="roomItem-template">
       <div
-        class="room__card flex flex-col gap-1 text-white border-2 bg-gray-600 rounded-md shadow-lg min-w-fit cursor-pointer"
+        class="room__card flex flex-col gap-1 text-white border-2 relative bg-gray-600 rounded-md shadow-lg min-w-fit"
       >
+        <button
+          id="agregarReservaButton"
+          class="absolute bottom-1 right-2 hover:bg-lime-500 text-white font-bold py-1 px-2 rounded"
+          type="reset"
+          title="Hacer Reservación"
+        >
+          <img
+            src="./src/images/add.png"
+            alt="Agregar reserva"
+            class="w-5 h-5 inline-block"
+          />
+        </button>
         <div class="room__card-info flex justify-between px-4 pt-2">
           <p class="text-3xl font-bold flex-wrap">
             Hab: <span class="room__card-number">203</span>
@@ -248,7 +263,8 @@
           <img
             src=""
             alt=""
-            class="room-status__icon w-10 h-10 p-1.5 rounded-4xl inline-block ml-14"
+            title="Editar estado de habitación"
+            class="room-status__icon w-10 h-10 p-1.5 rounded-4xl inline-block ml-14 cursor-pointer"
           />
         </div>
         <p class="px-4 text-md">
@@ -488,8 +504,7 @@
       </div>
     </template>
 
-    <!-- Popup Reserva Resnume -->
-
+    <!-- Popup Reserva Resumen -->
     <template id="reservaDetallePopup-template">
       <div
         class="detalleContainer relative w-full max-w-3xl h-fit p-4 bg-gray-800 rounded-lg shadow-lg z-50 flex flex-col gap-3"
@@ -511,46 +526,51 @@
           Detalle de la Reservación
         </h2>
         <!-- Sección de información general -->
-        <div class=" grid grid-cols-2 gap-3 text-sm text-white">
+        <div class="grid grid-cols-2 gap-3 text-sm text-white">
           <div>
-            <div class="reserva_container bg-gray-700 px-3 pt-3 pb-2 border-2 rounded-t-lg">
+            <div
+              class="reserva_container bg-gray-700 px-3 pt-3 pb-2 border-2 rounded-t-lg"
+            >
               <h3 class="text-white uppercase font-semibold mb-2">Reserva</h3>
               <p class="flex justify-between">
-                <span class=" text-gray-300">No.:</span>
+                <span class="text-gray-300">No.:</span>
                 <span id="reserva_numero" class="ml-2">#12345</span>
               </p>
               <p class="flex justify-between">
-                <span class=" text-gray-300">Fecha registro:</span>
+                <span class="text-gray-300">Fecha registro:</span>
                 <span id="reserva_fecha" class="ml-2 text-end">2025-07-05</span>
               </p>
               <p class="flex justify-between">
-                <span class=" text-gray-300">No. noches:</span>
+                <span class="text-gray-300">No. noches:</span>
                 <span id="reserva_noches" class="ml-2">3</span>
               </p>
             </div>
-            <div class="reservation__status flex justify-between p-2 rounded-b-lg ">
-              <span class=" text-gray-300">Estado:</span>
-              <span id="reserva_estado" class="ml-2 uppercase font-bold">Pendiente</span>
+            <div
+              class="reservation__status flex justify-between p-2 rounded-b-lg"
+            >
+              <span class="text-gray-300">Estado:</span>
+              <span id="reserva_estado" class="ml-2 uppercase font-bold"
+                >Pendiente</span
+              >
             </div>
           </div>
 
-          
           <div class="bg-gray-700 p-3 rounded-lg">
             <h3 class="text-white uppercase font-semibold mb-2">Cliente</h3>
             <p class="flex justify-between">
-              <span class=" text-gray-400">Cédula:</span>
+              <span class="text-gray-400">Cédula:</span>
               <span id="cliente_cedula" class="ml-2">123456789</span>
             </p>
             <p class="flex justify-between">
-              <span class=" text-gray-400">Nombre:</span>
+              <span class="text-gray-400">Nombre:</span>
               <span id="cliente_nombre" class="ml-2">Juan Pérez</span>
             </p>
             <p class="flex justify-between">
-              <span class=" text-gray-400">Teléfono:</span>
+              <span class="text-gray-400">Teléfono:</span>
               <span id="cliente_telefono" class="ml-2">3001234567</span>
             </p>
             <p class="flex justify-between">
-              <span class=" text-gray-400">Email:</span>
+              <span class="text-gray-400">Email:</span>
               <span id="cliente_email" class="ml-2">juan@email.com</span>
             </p>
           </div>
@@ -560,22 +580,26 @@
           <h3 class="text-white uppercase font-semibold mb-2">Habitación</h3>
           <div class="grid grid-cols-2 gap-x-4 text-sm mb-2">
             <div class="flex justify-between">
-              <span class=" text-gray-400">No.:</span>
+              <span class="text-gray-400">No.:</span>
               <span id="habitacion_numero" class="ml-2 text-white">101</span>
             </div>
             <div class="flex justify-between">
-              <span class=" text-gray-400">Categoría:</span>
-              <span id="habitacion_categoria" class="ml-2 text-white">Doble</span>
-            </div>
-            <div class="flex justify-between">
-              <span class=" text-gray-400">Precio por noche:</span>
-              <span id="habitacion_precio" class="ml-2 text-white">$80.000</span>
-            </div>
-            <div class="flex justify-between">
-              <span class=" text-gray-400"
-                >Estado habitación:</span
+              <span class="text-gray-400">Categoría:</span>
+              <span id="habitacion_categoria" class="ml-2 text-white"
+                >Doble</span
               >
-              <span id="habitacion_estado" class="ml-2 text-white">Ocupada</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-gray-400">Precio por noche:</span>
+              <span id="habitacion_precio" class="ml-2 text-white"
+                >$80.000</span
+              >
+            </div>
+            <div class="flex justify-between">
+              <span class="text-gray-400">Estado habitación:</span>
+              <span id="habitacion_estado" class="ml-2 text-white"
+                >Ocupada</span
+              >
             </div>
           </div>
           <div
@@ -608,6 +632,61 @@
             Cancelar
           </button>
         </div>
+      </div>
+    </template>
+
+    <!-- planilla para editar estado de habitación -->
+    <template id="editarEstadoHabitacionPopup-template">
+      <div
+        class="relative w-full max-w-md mx-auto p-6 bg-gray-800 rounded-lg shadow-lg h-fit z-100"
+      >
+        <!-- Botón de cerrar -->
+        <button
+          id="closeEditarEstadoHabitacionButton"
+          class="absolute top-2 right-2 hover:bg-gray-700 text-white font-bold py-1 px-2 rounded"
+          type="button"
+        >
+          <img
+            src="./src/images/icons8-close-50.png"
+            alt="Cerrar"
+            class="w-5 h-5 inline-block"
+          />
+        </button>
+
+        <!-- Título -->
+        <h2 class="text-xl font-bold text-white mb-4 text-center">
+          Editar Estado de la Habitación
+        </h2>
+
+        <!-- Formulario -->
+        <form id="editarEstadoHabitacionForm" class="flex flex-col gap-4">
+          <div>
+            <label for="selectEstadoHabitacion" class="block text-white mb-2">
+              Estado actual:
+            </label>
+            <select
+              id="selectEstadoHabitacion"
+              name="estado_habitacion"
+              class="w-full p-2 rounded bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-blue-600"
+              required
+            >
+              <option value="">Seleccione un estado</option>
+              <option value="1">Disponible</option>
+              <option value="5">Reservada</option>
+              <option value="2">Ocupada</option>
+              <option value="4">En Limpieza</option>
+              <option value="3">No Disponible</option>
+            </select>
+          </div>
+
+          <!-- Botón de aceptar -->
+          <button
+            type="submit"
+            class="bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded mt-2 transition-colors"
+          >
+            Guardar Cambios
+          </button>
+        </form>
       </div>
     </template>
 

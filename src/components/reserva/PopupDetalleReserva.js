@@ -328,7 +328,7 @@ export default class PopupDetalleReserva {
                 );
               });
               this.close(); // Cerrar el popup después de crear el reserva
-              alert("Reservación completada correctamente");
+              alert("Reservación cancelada correctamente");
             } else {
               const p = document.createElement("p");
               p.classList.add(

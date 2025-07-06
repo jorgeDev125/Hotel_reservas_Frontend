@@ -194,7 +194,7 @@ export default class PopupCearReserva {
 
         apiReservaInstance
           .crearReservacion(reservaData)
-          .then(() => {
+          .then(async() => {
             if (!habitacionStorage) {
               // reactualizar la lista de reservas
               const reservasLista = document.querySelector("#reservasList");
