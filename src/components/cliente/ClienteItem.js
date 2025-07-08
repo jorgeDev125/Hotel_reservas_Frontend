@@ -39,7 +39,7 @@ export default class ClienteItem {
           popupCliente.open();
 
           // Agrega el contenido del popup con los datos del cliente
-          document.querySelector(".popupCliente").prepend(popup);
+          document.querySelector(".popup").prepend(popup);
 
           // Elimina todos los event listeners previos de submit en el formulario
           const oldForm = popup.querySelector("#clienteForm");

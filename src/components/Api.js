@@ -31,7 +31,6 @@ export class Api {
         data && data.message
           ? data.message
           : data.error || "Hubo un error al procesar la solicitud.";
-      //console.error("Error del servidor:", errorMsg);
       throw new Error(errorMsg);
     }
   }

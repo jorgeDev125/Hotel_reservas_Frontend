@@ -1,11 +1,8 @@
-import { ApiHabitacion } from "../components/habitacion/ApiHabitacion";
 import EstadisticaItem from "../components/inicio/EstadisticaItem";
 import InicioView from "../components/inicio/InicioView";
-import { ApiReserva } from "../components/reserva/ApiReserva";
-import { apiInstanceConfig } from "./constants";
+import { apiHabitacionInstance } from "./habitacion";
+import { apiReservaInstance } from "./reserva";
 
-export const apiReservaInstance = new ApiReserva(apiInstanceConfig);
-export const apiHabitacionInstance = new ApiHabitacion(apiInstanceConfig);
 
 export async function renderInicioView() {
   const inicioVista = new InicioView().generateView();

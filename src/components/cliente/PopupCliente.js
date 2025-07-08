@@ -20,12 +20,10 @@ export default class PopupCliente {
   }
 
   open() {
-    document.querySelector(".popupCliente").classList.remove("hidden");
-    document.querySelector(".popupCliente").classList.add("flex");
-    document.querySelector(
-      ".popupCliente"
-    ).style = `top: calc((100vh - 558px) / 2); 
-                                                    left: calc((100vw - 384px) / 2);`;
+    document.querySelector(".popup").classList.remove("hidden");
+    document.querySelector(".popup").classList.add("flex");
+    document.querySelector(".popup").style = `top: calc((100vh - 558px) / 2); 
+                                              left: calc((100vw - 368px) / 2);`;
 
     document.querySelector(".overlay").classList.remove("hidden");
     // Autoenfocar el input de cédula cuando se abre el modal
@@ -46,8 +44,8 @@ export default class PopupCliente {
   }
 
   close() {
-    document.querySelector(".popupCliente").classList.remove("flex");
-    document.querySelector(".popupCliente").classList.add("hidden");
+    document.querySelector(".popup").classList.remove("flex");
+    document.querySelector(".popup").classList.add("hidden");
     document.querySelector(".overlay").classList.add("hidden");
 
     this._popup.closest(".cliente__form").remove();
@@ -104,7 +102,7 @@ export default class PopupCliente {
                 }
               });
             } else {
-              // Aquí tu lógica para abrir el popup y poner la cédula
+              // abrir el popup y poner la cédula
               const popupReserva = new PopupCearReserva();
               const popup = popupReserva.generatePopup();
               popup.querySelector("#cedula").value = cedulaStorage;
@@ -126,7 +124,7 @@ export default class PopupCliente {
                 })
                 .then(() => {
                   popupReserva.open();
-                  document.querySelector(".popupReserva").prepend(popup);
+                  document.querySelector(".popup").prepend(popup);
                   // Limpia el valor para que no se repita la acción en futuros reloads
                   localStorage.removeItem("cedula_para_popup");
                 })

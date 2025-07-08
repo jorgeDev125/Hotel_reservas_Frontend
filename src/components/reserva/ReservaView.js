@@ -20,7 +20,15 @@ export default class ReservaView {
         const popupReserva = new PopupCearReserva();
         const popup = popupReserva.generatePopup();
         popupReserva.open();
-        document.querySelector(".popupReserva").prepend(popup);
+        document.querySelector(".popup").prepend(popup);
+      });
+    this._element
+      .querySelector(".addReservaButton")
+      .addEventListener("click", () => {
+        const popupReserva = new PopupCearReserva();
+        const popup = popupReserva.generatePopup();
+        popupReserva.open();
+        document.querySelector(".popup").prepend(popup);
       });
   }
 

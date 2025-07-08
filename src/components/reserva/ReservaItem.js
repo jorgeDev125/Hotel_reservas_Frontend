@@ -35,7 +35,7 @@ export default class ReservaItem {
       const popupDetalleReserva = new PopupDetalleReserva(this._data);
       const popup = popupDetalleReserva.generatePopup();
       popupDetalleReserva.open();
-      document.querySelector(".popupDetalleReserva").prepend(popup);
+      document.querySelector(".popup").prepend(popup);
     });
     // Agregar el evento para el botón de eliminar
   }

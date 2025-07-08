@@ -14,7 +14,7 @@ export async function renderReservaView() {
 
   const habitacion = JSON.parse(localStorage.getItem("habitacion_para_popup"));
   if (habitacion) {
-    // Aquí tu lógica para abrir el popup y poner la habitacion
+    // abrir el popup y poner la habitacion
     const popupReserva = new PopupCearReserva();
     const popup = popupReserva.generatePopup();
     popup.querySelector("#habitacion_numero").textContent = habitacion.numero;
@@ -22,7 +22,7 @@ export async function renderReservaView() {
       habitacion.categoria;
     popup.querySelector("#habitacion_precio").textContent = habitacion.precio;
     popupReserva.open();
-    document.querySelector(".popupReserva").prepend(popup);
+    document.querySelector(".popup").prepend(popup);
 
     // Limpia el valor para que no se repita la acción en futuros reloads
     localStorage.removeItem("habitacion_para_popup");

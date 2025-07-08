@@ -24,7 +24,8 @@ export const ROUTER = {
         "text-center",
         "w-full",
         "text-lg",
-        "font-bold"
+        "font-bold",
+        "mt-20"
       );
       h1.textContent = "404 - La página no existe";
       content.appendChild(h1);

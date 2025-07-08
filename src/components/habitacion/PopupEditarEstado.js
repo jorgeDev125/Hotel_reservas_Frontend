@@ -25,19 +25,17 @@ export default class PopupEditarEstadoHab {
   }
 
   open() {
-    document.querySelector(".popupEstadoHabitacion").classList.remove("hidden");
-    document.querySelector(".popupEstadoHabitacion").classList.add("flex");
-    document.querySelector(
-      ".popupEstadoHabitacion"
-    ).style = `top: calc((100vh - 558px) / 2); 
-                                                    left: calc((100vw - 384px) / 2);`;
-
+    document.querySelector(".popup").classList.remove("hidden");
+    document.querySelector(".popup").classList.add("flex");
+    document.querySelector(".popup").style = `top: calc((100vh - 558px) / 2); 
+               left: calc((100vw - 336px) / 2);`;
     document.querySelector(".overlay").classList.remove("hidden");
+    this._popup.querySelector("#estadoActualHabitacion").textContent = this._estado
   }
 
   close() {
-    document.querySelector(".popupCliente").classList.remove("flex");
-    document.querySelector(".popupCliente").classList.add("hidden");
+    document.querySelector(".popup").classList.remove("flex");
+    document.querySelector(".popup").classList.add("hidden");
     document.querySelector(".overlay").classList.add("hidden");
 
     this._popup.closest(".editar_estado_container").remove();
@@ -55,7 +53,7 @@ export default class PopupEditarEstadoHab {
         ).value;
         apiHabitacionInstance
           .cambiarEstadoHabitacion(this._habitacionId, estadoId)
-          .then(() => {
+          .then(async() => {
             const habitacionLista = document.querySelector("#roomList");
             habitacionLista.textContent = ""; // Limpiar la lista actual
             return apiHabitacionInstance
@@ -68,7 +66,6 @@ export default class PopupEditarEstadoHab {
                     );
                   });
                   this.close(); // Cerrar el popup después de crear el reserva
-                  alert("Estado actualizado correctamente");
                 } else {
                   const p = document.createElement("p");
                   p.classList.add(

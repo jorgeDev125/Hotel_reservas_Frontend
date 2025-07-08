@@ -46,7 +46,7 @@ export default class HabitacionItem {
         );
         popup.querySelector("#habitacion_id").value = this._habitacionId;
         popupReserva.open();
-        document.querySelector(".popupReserva").prepend(popup);
+        document.querySelector(".popup").prepend(popup);
       });
 
     this._element
@@ -55,7 +55,7 @@ export default class HabitacionItem {
         const popupEstadoHab = new PopupEditarEstadoHab(this._data);
         const popup = popupEstadoHab.generatePopup();
         popupEstadoHab.open();
-        document.querySelector(".popupEstadoHabitacion").prepend(popup);
+        document.querySelector(".popup").prepend(popup);
       });
   }
 
@@ -83,7 +83,7 @@ export default class HabitacionItem {
           .querySelector(".room-status__icon")
           .classList.add("bg-lime-600", "hover:bg-lime-500");
         this._element.querySelector(".room-status__icon").src =
-          "images/disponible.png";
+          "images/completada.png";
         break;
       case "Reservada":
         this._element.classList.add("border-gray-500");
@@ -94,7 +94,7 @@ export default class HabitacionItem {
           .querySelector(".room-status__icon")
           .classList.add("bg-gray-500", "hover:bg-gray-400");
         this._element.querySelector(".room-status__icon").src =
-          "images/disponible.png";
+          "images/reservada.png";
         this._element
           .querySelector("#agregarReservaButton")
           .classList.add("hidden");

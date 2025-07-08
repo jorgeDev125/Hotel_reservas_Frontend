@@ -20,7 +20,7 @@ export default class ClienteView {
         const popupCliente = new PopupCliente();
         const popup = popupCliente.generatePopup();
         popupCliente.open();
-        document.querySelector(".popupCliente").prepend(popup);
+        document.querySelector(".popup").prepend(popup);
       });
   }
 

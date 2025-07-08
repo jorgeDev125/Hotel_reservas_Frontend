@@ -42,13 +42,9 @@ export default class PopupDetalleReserva {
   }
 
   open() {
-    document.querySelector(".popupDetalleReserva").classList.remove("hidden");
-    document
-      .querySelector(".popupDetalleReserva")
-      .classList.add("flex", "top-5");
-    document.querySelector(
-      ".popupDetalleReserva"
-    ).style = `left: calc((100vw - 448px) / 2);`;
+    document.querySelector(".popup").classList.remove("hidden");
+    document.querySelector(".popup").classList.add("flex", "top-5");
+    document.querySelector(".popup").style = `left: calc((100vw - 416px) / 2);`;
     document.querySelector(".overlay").classList.remove("hidden");
     this._popup.querySelector("#reserva_numero").textContent = this._reserva_id;
     this._popup.querySelector("#reserva_fecha").textContent = formatDateTime(
@@ -64,6 +60,8 @@ export default class PopupDetalleReserva {
     ).textContent = `${this._nombre_cliente} ${this._apellido_cliente}`;
     this._popup.querySelector("#cliente_telefono").textContent =
       this._telefono_cliente;
+    this._popup.querySelector("#cliente_email").textContent =
+      this._email_cliente;
     this._popup.querySelector("#habitacion_numero").textContent =
       this._numero_habitacion;
     this._popup.querySelector("#habitacion_categoria").textContent =
@@ -225,8 +223,8 @@ export default class PopupDetalleReserva {
   }
 
   close() {
-    document.querySelector(".popupDetalleReserva").classList.remove("flex");
-    document.querySelector(".popupDetalleReserva").classList.add("hidden");
+    document.querySelector(".popup").classList.remove("flex");
+    document.querySelector(".popup").classList.add("hidden");
     document.querySelector(".overlay").classList.add("hidden");
 
     this._popup.closest(".detalleContainer").remove();
@@ -235,106 +233,113 @@ export default class PopupDetalleReserva {
   _setEventListeners() {
     // Agregar el evento para botón de Activar la reservación
     this._popup.querySelector("#btnActivar").addEventListener("click", () => {
-      apiReservaInstance
-        .actualizarEstadoReservacion(this._reserva_id, { estadoId: 2 })
-        .then(async () => {
-          const reservasLista = document.querySelector("#reservasList");
-          reservasLista.textContent = ""; // Limpiar la lista actual
+      if (window.confirm("¿Quieres activar la reservación?")) {
+        apiReservaInstance
+          .actualizarEstadoReservacion(this._reserva_id, { estadoId: 2 })
+          .then(async () => {
+            const reservasLista = document.querySelector("#reservasList");
+            reservasLista.textContent = ""; // Limpiar la lista actual
 
-          // Volver a cargar los reservas
-          return await apiReservaInstance
-            .obtenerReservaciones()
-            .then((reservas) => {
-              if (reservas && reservas.length > 0) {
-                reservas.forEach((reserva) => {
-                  reservasLista.appendChild(
-                    new ReservaItem(reserva).generateReserva()
+            // Volver a cargar los reservas
+            return await apiReservaInstance
+              .obtenerReservaciones()
+              .then((reservas) => {
+                if (reservas && reservas.length > 0) {
+                  reservas.forEach((reserva) => {
+                    reservasLista.appendChild(
+                      new ReservaItem(reserva).generateReserva()
+                    );
+                  });
+                  this.close(); // Cerrar el popup después de crear el reserva
+                } else {
+                  const p = document.createElement("p");
+                  p.classList.add(
+                    "text-white",
+                    "text-center",
+                    "w-full",
+                    "text-lg",
+                    "font-bold"
                   );
-                });
-                this.close(); // Cerrar el popup después de crear el reserva
-                alert("Reservación activada correctamente");
-              } else {
-                const p = document.createElement("p");
-                p.classList.add(
-                  "text-white",
-                  "text-center",
-                  "w-full",
-                  "text-lg",
-                  "font-bold"
-                );
-                p.textContent = "No hay reservacioness disponibles.";
-                reservasLista.appendChild(p);
-              }
-            });
-        });
+                  p.textContent = "No hay reservacioness disponibles.";
+                  reservasLista.appendChild(p);
+                }
+              });
+          });
+      }
     });
 
     //evento para boton de completar reservación
     this._popup.querySelector("#btnCompletar").addEventListener("click", () => {
-      apiReservaInstance
-        .actualizarEstadoReservacion(this._reserva_id, { estadoId: 3 })
-        .then(async () => {
-          const reservasLista = document.querySelector("#reservasList");
-          reservasLista.textContent = ""; // Limpiar la lista actual
+      if (window.confirm("¿Quieres completar la reservación?")) {
+        apiReservaInstance
+          .actualizarEstadoReservacion(this._reserva_id, { estadoId: 3 })
+          .then(async () => {
+            const reservasLista = document.querySelector("#reservasList");
+            reservasLista.textContent = ""; // Limpiar la lista actual
 
-          // Volver a cargar los reservas
-          return apiReservaInstance.obtenerReservaciones().then((reservas) => {
-            if (reservas && reservas.length > 0) {
-              reservas.forEach((reserva) => {
-                reservasLista.appendChild(
-                  new ReservaItem(reserva).generateReserva()
-                );
+            // Volver a cargar los reservas
+            return apiReservaInstance
+              .obtenerReservaciones()
+              .then((reservas) => {
+                if (reservas && reservas.length > 0) {
+                  reservas.forEach((reserva) => {
+                    reservasLista.appendChild(
+                      new ReservaItem(reserva).generateReserva()
+                    );
+                  });
+                  this.close(); // Cerrar el popup después de crear el reserva
+                } else {
+                  const p = document.createElement("p");
+                  p.classList.add(
+                    "text-white",
+                    "text-center",
+                    "w-full",
+                    "text-lg",
+                    "font-bold"
+                  );
+                  p.textContent = "No hay reservacioness disponibles.";
+                  reservasLista.appendChild(p);
+                }
               });
-              this.close(); // Cerrar el popup después de crear el reserva
-              alert("Reservación completada correctamente");
-            } else {
-              const p = document.createElement("p");
-              p.classList.add(
-                "text-white",
-                "text-center",
-                "w-full",
-                "text-lg",
-                "font-bold"
-              );
-              p.textContent = "No hay reservacioness disponibles.";
-              reservasLista.appendChild(p);
-            }
           });
-        });
+      }
     });
 
     //evento para boton de cancelar reservación
     this._popup.querySelector("#btnCancelar").addEventListener("click", () => {
-      apiReservaInstance
-        .actualizarEstadoReservacion(this._reserva_id, { estadoId: 4 })
-        .then(async () => {
-          const reservasLista = document.querySelector("#reservasList");
-          reservasLista.textContent = ""; // Limpiar la lista actual
+      if (window.confirm("¿Quieres cancelar la reservación?")) {
+        apiReservaInstance
+          .actualizarEstadoReservacion(this._reserva_id, { estadoId: 4 })
+          .then(async () => {
+            const reservasLista = document.querySelector("#reservasList");
+            reservasLista.textContent = ""; // Limpiar la lista actual
 
-          // Volver a cargar los reservas
-          return apiReservaInstance.obtenerReservaciones().then((reservas) => {
-            if (reservas && reservas.length > 0) {
-              reservas.forEach((reserva) => {
-                reservasLista.appendChild(
-                  new ReservaItem(reserva).generateReserva()
-                );
+            // Volver a cargar los reservas
+            return apiReservaInstance
+              .obtenerReservaciones()
+              .then((reservas) => {
+                if (reservas && reservas.length > 0) {
+                  reservas.forEach((reserva) => {
+                    reservasLista.appendChild(
+                      new ReservaItem(reserva).generateReserva()
+                    );
+                  });
+                  this.close(); // Cerrar el popup después de crear el reserva
+                } else {
+                  const p = document.createElement("p");
+                  p.classList.add(
+                    "text-white",
+                    "text-center",
+                    "w-full",
+                    "text-lg",
+                    "font-bold"
+                  );
+                  p.textContent = "No hay reservacioness disponibles.";
+                  reservasLista.appendChild(p);
+                }
               });
-              this.close(); // Cerrar el popup después de crear el reserva
-              alert("Reservación cancelada correctamente");
-            } else {
-              const p = document.createElement("p");
-              p.classList.add(
-                "text-white",
-                "text-center",
-                "w-full",
-                "text-lg",
-                "font-bold"
-              );
-              p.textContent = "No hay reservacioness disponibles.";
-              reservasLista.appendChild(p);
-            }
           });
-        });
+      }
     });
 
     //evento para activar funcion close

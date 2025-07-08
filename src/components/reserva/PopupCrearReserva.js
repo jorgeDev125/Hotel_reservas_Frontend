@@ -43,11 +43,9 @@ export default class PopupCearReserva {
   }
 
   open() {
-    document.querySelector(".popupReserva").classList.remove("hidden");
-    document.querySelector(".popupReserva").classList.add("flex", "top-5");
-    document.querySelector(
-      ".popupReserva"
-    ).style = `left: calc((100vw - 448px) / 2);`;
+    document.querySelector(".popup").classList.remove("hidden");
+    document.querySelector(".popup").classList.add("flex", "top-5");
+    document.querySelector(".popup").style = `left: calc((100vw - 480px) / 2);`;
     document.querySelector(".overlay").classList.remove("hidden");
 
     const cedula = localStorage.getItem("cedula_para_popup");
@@ -70,8 +68,8 @@ export default class PopupCearReserva {
   }
 
   close() {
-    document.querySelector(".popupReserva").classList.remove("flex");
-    document.querySelector(".popupReserva").classList.add("hidden");
+    document.querySelector(".popup").classList.remove("flex");
+    document.querySelector(".popup").classList.add("hidden");
     document.querySelector(".overlay").classList.add("hidden");
 
     this._popup.closest(".reserva__form").remove();
@@ -115,7 +113,7 @@ export default class PopupCearReserva {
               popup.querySelector("#cedula").value =
                 localStorage.getItem("cedula_para_popup");
               popupCliente.open();
-              document.querySelector(".popupCliente").prepend(popup);
+              document.querySelector(".popup").prepend(popup);
             }
           });
       });
@@ -194,7 +192,7 @@ export default class PopupCearReserva {
 
         apiReservaInstance
           .crearReservacion(reservaData)
-          .then(async() => {
+          .then(async () => {
             if (!habitacionStorage) {
               // reactualizar la lista de reservas
               const reservasLista = document.querySelector("#reservasList");
@@ -226,7 +224,13 @@ export default class PopupCearReserva {
                   }
                 });
             } else {
-              const habitacionLista = document.querySelector("#roomList");
+              alert("Reserva creada exitosamente");
+              this.close(); // Cerrar el popup después de crear el reserva
+              localStorage.removeItem("habitacion_para_popup");
+
+              window.location.href = "/reservas";
+
+              /* const habitacionLista = document.querySelector("#roomList");
               habitacionLista.textContent = ""; // Limpiar la lista actual
               return apiHabitacionInstance
                 .obtenerHabitaciones()
@@ -252,7 +256,7 @@ export default class PopupCearReserva {
                     p.textContent = "No hay Habitaciones.";
                     habitacionLista.appendChild(p);
                   }
-                });
+                }); */
             }
           })
           .catch((error) => {
