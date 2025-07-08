@@ -4,7 +4,7 @@ import HabitacionView from "../components/habitacion/HabitacionView";
 import { apiInstanceConfig } from "./constants";
 
 //crea instancia de la clase ApiHabitacion
-// Esta instancia se utilizará para realizar peticiones a la API de clientes
+// Esta instancia se utilizará para realizar peticiones a la API de habitaciones
 export const apiHabitacionInstance = new ApiHabitacion(apiInstanceConfig);
 
 export async function renderRoomView() {
@@ -16,6 +16,18 @@ export async function renderRoomView() {
     habitaciones = await apiHabitacionInstance.obtenerHabitaciones();
   } catch (error) {
     console.error("Error al cargar habitaciones:", error);
+  }
+  const habitacionesParaActivar = []
+  habitaciones.map(habitacion => {
+    if (habitacion.estado_habitacion === "En Limpieza") {
+      habitacionesParaActivar.push(habitacion)
+    }
+  })
+  if (habitacionesParaActivar.length === 0) {
+    habitacionVista.querySelector("#activarHabitacionesButton").disabled = true
+    habitacionVista.querySelector("#activarHabitacionesButton").classList.add("bg-gray-400" , "cursor-not-allowed")
+  } else {
+    habitacionVista.querySelector("#activarHabitacionesButton").classList.add("bg-blue-700", "hover:bg-blue-600", "cursor-pointer")
   }
 
   if (habitaciones && habitaciones.length > 0) {

@@ -44,4 +44,8 @@ export class ApiHabitacion extends Api {
         return await this._makeRequest(`/habitaciones/estados`);
     }
 
+    //cambiar estado de todas las habitaciones de En Limpieza a Disponible
+    async cambiarTodasDeLimpiezaADisponble() {
+        return await this._makeRequest(`/habitaciones/limpieza-a-disponible`, "PUT");
+    }
 }
