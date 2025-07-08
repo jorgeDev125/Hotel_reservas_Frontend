@@ -9,15 +9,36 @@
     <link rel="icon" type="image/svg+xml" href="favicon.ico" />
     <title>Control Reservas Hotel</title>
   </head>
-  <body class="flex flex-row min-h-screen bg-gray-100 relative">
-    <div class="w-52">
+  <body class="body flex flex-row min-h-screen h-full bg-gray-100 relative">
+    <div
+      id="menuDesplegable"
+      class="w-8 md:hidden transition bg-gray-900 h-screen sticky top-0 flex flex-col justify-center"
+    >
+      <img
+        src="images/menu.png"
+        alt="Mi Logo"
+        class="w-8 h-12 my-5 inline-block items-center"
+      />
+    </div>
       <nav
-        class="flex flex-col items-center bg-gray-700 text-white h-screen sticky top-0 p-4 gap-1"
+      id="sidebar"
+      class="hidden md:flex flex-col items-center bg-gray-900 text-white h-screen sticky top-0 p-4 gap-1 z-50 md:z-30"
+    >
+      <button
+        id="closeSidebarButton"
+        class="absolute md:hidden top-2 right-2 hover:bg-gray-700 font-bold py-1 px-2 rounded"
+        type="reset"
       >
         <img
+          src="images/icons8-close-50.png"
+          alt="Cerrar"
+          class="w-5 h-5 inline-block"
+        />
+      </button>
+      <img
           src="images/hotel-svgrepo-com.png"
           alt="Mi Logo"
-          class="w-24 h-24 mb-5 inline-block"
+        class="w-40 h-40 my-5 inline-block"
         />
         <button
           class="w-44 cursor-pointer hover:bg-gray-600 py-1 rounded-md"
