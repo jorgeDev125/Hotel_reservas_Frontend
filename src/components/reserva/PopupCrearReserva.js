@@ -94,15 +94,15 @@ export default class PopupCearReserva {
           .obtenerClientePorCedula(formData.get("cedula"))
           .then((cliente) => {
             this._popup.querySelector("#cliente_cedula").textContent =
-              cliente[0].cedula;
+              cliente.cedula;
             this._popup.querySelector(
               "#cliente_nombre"
-            ).textContent = `${cliente[0].nombre} ${cliente[0].apellido}`;
+            ).textContent = `${cliente.nombre} ${cliente.apellido}`;
             this._popup.querySelector("#cliente_telefono").textContent =
-              cliente[0].telefono;
+              cliente.telefono;
             this._popup.querySelector("#cliente_email").textContent =
-              cliente[0].email;
-            this._popup.querySelector("#cliente_id").value = cliente[0].id;
+              cliente.email;
+            this._popup.querySelector("#cliente_id").value = cliente.id;
           })
           .catch((error) => {
             if (window.confirm(error + "¿Quieres crear el usuario?")) {

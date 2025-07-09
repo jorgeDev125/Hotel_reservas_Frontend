@@ -110,15 +110,15 @@ export default class PopupCliente {
                 .obtenerClientePorCedula(cedulaStorage)
                 .then((cliente) => {
                   popup.querySelector("#cliente_cedula").textContent =
-                    cliente[0].cedula;
+                    cliente.cedula;
                   popup.querySelector(
                     "#cliente_nombre"
-                  ).textContent = `${cliente[0].nombre} ${cliente[0].apellido}`;
+                  ).textContent = `${cliente.nombre} ${cliente.apellido}`;
                   popup.querySelector("#cliente_telefono").textContent =
-                    cliente[0].telefono;
+                    cliente.telefono;
                   popup.querySelector("#cliente_email").textContent =
-                    cliente[0].email;
-                  popup.querySelector("#cliente_id").value = cliente[0].id;
+                    cliente.email;
+                  popup.querySelector("#cliente_id").value = cliente.id;
                   this.close();
                   alert("Cliente creado exitosamente");
                 })
@@ -134,7 +134,7 @@ export default class PopupCliente {
             }
           })
           .catch((error) => {
-            console.log(error);
+            alert(error);
           });
       });
 
