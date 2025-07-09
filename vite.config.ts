@@ -4,7 +4,7 @@ import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig({
   build: {
-    outDir: 'public/build', // Carpeta de salida
+    outDir: 'public/dist', // Carpeta de salida
   },
   plugins: [
     tailwindcss(),
